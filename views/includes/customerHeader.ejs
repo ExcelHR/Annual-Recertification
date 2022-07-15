@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/upload.css">
+    <link rel="stylesheet" href="/css/homepage.css"/>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+
+<body>
+    <header class="main-header">
+        <button id="side-menu-toggle">Menu</button>
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a href="/customer/homepage">Home</a>
+                </li>
+                <!-- <li class="main-header__item">
+                    <a  href="/products">Products</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/cart">Cart</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/orders">Orders</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/admin/add-product">Add Product
+                    </a>
+                </li>
+                <li class="main-header__item">
+                    <a  href="/admin/products">Admin Products
+                    </a>
+                </li> -->
+            </ul>
+            <ul class="main-header__item-list">
+                <!-- <li class="main-header__item">
+                    <a href="/login">Login</a>
+                </li> -->
+                <li class="main-header__item">
+                    <div style="position: relative; display: inline-block;">
+                        <div id="myDropdown" style="display: none; position: absolute; ">
+                            <a style="display: block" href="#home">Home</a>
+                            <a style="display: block" href="#about">About</a>
+                            <a style="display: block" href="#contact">Contact</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="main-header__item">
+                    <input type="hidden" name="_csrf">
+                    <button type="submit" id="logout" >Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="mobile-nav">
+        <ul class="mobile-nav__item-list">
+            <li class="mobile-nav__item">
+                <a href="/customer/homepage">Home</a>
+            </li>
+            <!-- <li class="mobile-nav__item">
+                <a  href="/products">Products</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/cart">Cart</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/orders">Orders</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/admin/add-product">Add Product
+                </a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/admin/products">Admin Products
+                </a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/login">Login</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/signup">Signup</a>
+            </li> -->
+            <li class="mobile-nav__item">
+                <input type="hidden" name="_csrf">
+                <button type="submit" id="logout">Logout</button>
+            </li>
+        </ul>
+    </nav>
+<!-- </body>
+</html> -->

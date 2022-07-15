@@ -1,0 +1,10 @@
+<p class="copyright text-muted text-center small">&copy; Excel Residential 2022. Powered by <a target='_blank' href='https://excelresidential.com/'>Excel Residential</a>.</p>
+<script>
+    function getToken(){
+        var token=localStorage.getItem("token");
+        if(token==null){
+            window.location.href="/auth/login";
+        }
+        return token;
+    }   
+</script>

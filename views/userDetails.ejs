@@ -1,0 +1,128 @@
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/login.css">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8000">Login</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">Your Property</div>
+                                        
+                    <div class="card-body ">
+                        <div class="card mx-auto " style="width: 18rem;margin-bottom: 3rem;">
+                            <div class="card-header">
+                              <p id="name" class="card-text d-flex justify-content-center "></p>
+                              </div>
+                            <img class="card-img-top" src="https://images1.loopnet.com/i2/rg7ixHhoSnT-FPIgrhMUEpL4IfyeIdqzvweXQslLSI0/106/multifamily-property-for-sale-8819-reading-ave-los-angeles-ca-90045.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <p id="address1" class="card-text d-flex justify-content-center"></p>
+                              <p id="address2"class="card-text d-flex justify-content-center"></p>
+                            </div>
+                          </div>
+                        <form id="myForm"  method="POST" >
+                           
+                            <div class="form-group row ">
+                                <h2 class="col-md-12 d-flex justify-content-center ">Account Information</h2>
+                            </div>  
+                            <div class="form-group row mb-5">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                <div class="col-md-6">
+                                    <input type="email" id="email" class="form-control" name="email-address" required  />
+                                </div>
+                            </div>
+
+                            <div class="form-group row ">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" class="form-control" name="password" required/>
+                                     <!-- oninput="passwordValidation(event)"/> -->
+                                    <div  id="pwdValidationText" class=" text text-danger text-center mb-2 invisible" >
+                                        The password should contain minimum 8 characters.
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="Cpassword" class="form-control" name="password" required />
+                                    <!-- oninput="CpasswordValidation(event)"/> -->
+                                    <div  id="CpwdValidationText" class=" text text-danger text-center mb-2 invisible" >
+                                        The passwords do not match
+                                    </div>
+                                </div>
+                             
+                            </div>  
+                            <div class="col-md-6 offset-md-6">
+                                <button id="submitBtn" type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                                
+                              
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</main>
+
+
+
+
+
+
+
+</body>
+<script type="text/javascript" src="/js/userDetails.js" ></script>
+
+    <%- include('footer'); -%>
+    
+</html>
