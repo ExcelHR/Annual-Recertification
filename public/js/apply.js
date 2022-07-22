@@ -357,7 +357,7 @@ submitBtn.onclick = function(e){
     axios.post("/apply",inputObj)
     .then((res)=>{
       let data = res.data
-      window.location.href="/auth/login"
+      window.location.href="/user/login"
     })
     .catch((err)=>{
       let message = err.response && err.response.data && err.response.data.message
@@ -380,7 +380,7 @@ submitBtn.onclick = function(e){
 //   axios.post("/apply")
 //   .then(function (res){
 //     let data = res.data
-//     window.location="/auth/login"
+//     window.location="/user/login"
 //   })
 //   .catch(function onError(err){
 //     let message = err.response && err.response.data && err.response.data.message

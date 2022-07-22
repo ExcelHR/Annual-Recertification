@@ -1,12 +1,35 @@
-const Address = require("../models/Address")
+const bcrypt = require("bcryptjs")
 const User = require("../models/User")
 const Customer = require("../models/Customer")
 const AppError = require("../utils/appError")
 const { deleteFiles } = require("../utils/fileUtil")
-
+const Admin=require("../models/Admin")
 const moment = require("moment-timezone")
 const mongoose = require("mongoose")
 
+exports.login= async(req,res,next)=>{
+    res.render('admin_login')
+}
+exports.admin_dashboard = async(req,res,next)=>{
+    res.render('admin_dashboard')
+}
+exports.loginValidation= async(req,res,next)=>{
+    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    console.log("backend")
+    const {email,password} =req.body
+    console.log(req.body)
+    let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
+    let admin = await Admin.findOne({email})
+    if (!admin ){
+            console.log("No admin found")
+            return next(new AppError("No admin with this adminname exists.",400))
+    }
+    let match = await bcrypt.compare(password,admin.password)
+    if(!match){
+        return next(new AppError("Password incorrect. Please enter the correct password",400))
+    }
+    res.send("Validated")
+};
 // utitlity function for deleting documents.
 async function unlinkUploadedFiles({ files = {} }) {
     const paths = Object.values(files).flat().map(({ path }) => path)

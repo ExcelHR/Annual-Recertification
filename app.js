@@ -1,6 +1,7 @@
 // Global modules
 const path=require("path")
 var cors = require('cors')
+const methodOverride=require('method-override')
 
 // Custom modules
 const express=require("express")
@@ -13,7 +14,7 @@ const {configDB} = require("./utils/start")
 env.config({path: `./config.env`})
 
 // Authentication routes(logic)
-const authRoutes = require("./routes/authRoutes")
+const userRoutes = require("./routes/userRoutes")
 // Admin user routes(logic)
 const adminRoutes = require("./routes/adminRoutes")
 // Customer routes(logic)
@@ -22,6 +23,7 @@ const customerRoutes = require("./routes/customerRoutes")
 const registrationRoutes = require("./routes/registrationRoutes")
 // Global error routes(logic)
 const globalErrorController = require("./controllers/errorController")
+const  Grid  = require("gridfs-stream")
 
 
 
@@ -29,7 +31,6 @@ const mongodb_uri=process.env.DATABASE_LOCAL
 const port=process.env.PORT
 
 const app=express();
-
 (async()=>{
     try{
         // Make a database connection
@@ -37,6 +38,13 @@ const app=express();
         console.log(" Database connection successfull!")
         // Create an admin user if not present
         await configDB()
+        const conn=mongoose.createConnection(mongodb_uri)
+        let gfs
+        conn.once('open',()=>{
+            console.log("DB is opened")
+            gfs=Grid(conn.db,mongoose.mongo)
+            gfs.collection('Documents')
+        })
     }catch(error){
         console.log(error)
     }
@@ -49,11 +57,14 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use('/protected', express.static('protected'))
 
 
+app.use(methodOverride('_method'))
 
 // Use ejs for frontend views
 app.set("view engine","ejs")
 // Set frontend views path
 app.set("views",path.join(__dirname,"views"))
+
+//Create Storage Engine
 
 // session
 app.use(session(
@@ -71,7 +82,7 @@ app.get("/",function(req,res,next){
 });
 
 // Routing to appropriate routers(logic)
-app.use("/auth",authRoutes)
+app.use("/user",userRoutes)
 app.use("/admin",adminRoutes)
 app.use("/customer",customerRoutes)
 app.use("/register",registrationRoutes)

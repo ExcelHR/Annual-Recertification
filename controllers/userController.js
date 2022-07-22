@@ -1,9 +1,14 @@
 const mongoose = require("mongoose")
 const User = require("../models/User")
+const Admin=require("../models/Admin")
 const Customer = require("../models/Customer")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const AppError = require("../utils/appError")
+
+
+// const router=Router();
+
 
 
 // Create a JWT token
@@ -73,7 +78,7 @@ exports.login= async(req,res,next)=>{
     if(!match){
         return next(new AppError("Password incorrect. Please enter the correct password",400))
     }
-    res.send( )
+    res.send({userId:user._id})
 };
 
 
@@ -155,3 +160,16 @@ exports.postCreateAdmin = async(req,res,next)=>{
         status:"success"
     })
 };
+exports.user_dashboard = async(req,res,next)=>{
+    res.render('user_dashboard')
+}
+
+exports.upload_documents = async(req,res,next)=>{
+    res.render('documents_upload')
+}
+
+exports.storeDocuemtns =async(req,res,next)=>{
+    console.log(req.file)
+    res.json({file:req.file})
+}
+

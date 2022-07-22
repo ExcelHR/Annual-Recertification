@@ -34,11 +34,11 @@ form.addEventListener("submit", async function (e) {
     }
     // Make a backend API request to login to the system
     try {
-        const res = await axios.post("user/login", { email, password })
-        console.log(res.data)
-        if (res.data) {
+        const res = await axios.post("/admin/loginValidation", { email, password })
+        console.log(res)
+        if (res.data=="Validated") {
             console.log("Success")
-                window.location.href=`/user/dashboard/?id=${res.data.userId}`
+                window.location.replace('/admin/dashboard')
         }
     }
     catch (err) {

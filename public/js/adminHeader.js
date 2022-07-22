@@ -8,5 +8,5 @@ logoutBtn.onclick = function(e){
     localStorage.removeItem("token")
     localStorage.removeItem("userId")
     localStorage.removeItem("role")
-    window.location.href = "/auth/login"
+    window.location.href = "/user/login"
 }

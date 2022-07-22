@@ -2,7 +2,7 @@ const{Router} = require("express")
 const router = Router()
 
 const customerController = require("../controllers/customerController")
-const authController = require("../controllers/authController")
+const userController = require("../controllers/userController")
 
 /*** EJS Router ***/
 
@@ -25,7 +25,7 @@ router.route("/details/:customerId")
 // Handler for - "/rentalDocuments/{specific_customer_Id}"
 router.route("/rentalDocuments/:customerId")
     .get(customerController.getRentalDocuments)
-    .post(authController.protect,customerController.documentHandler,customerController.postRentalDocuments)
+    .post(userController.protect,customerController.documentHandler,customerController.postRentalDocuments)
     .patch(customerController.documentHandler,customerController.patchRentalDocuments)
 
 module.exports = router

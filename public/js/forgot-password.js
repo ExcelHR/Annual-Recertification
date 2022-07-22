@@ -4,10 +4,10 @@ form.addEventListener("submit", async function (e) {
     e.preventDefault();
     let email = document.getElementById("email").value.trim();
     console.log(email)
-    window.location.href = "/auth/change-password"
+    window.location.href = "/user/change-password"
     // let newPassword = document.getElementById("newPassword").value.trim();
     // let confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
-    // window.location.href="auth/change-password"
+    // window.location.href="user/change-password"
     // // Validate on the password
     // if(newPassword==""){
     //     alert("Please enter a new password.")
@@ -32,10 +32,10 @@ form.addEventListener("submit", async function (e) {
 
 
     // // Backend API request to update the password
-    // axios.post("/auth/forgot-password",{email,newPassword})
+    // axios.post("/user/forgot-password",{email,newPassword})
     // .then((res)=>{
     //     let data = res.data
-    //     window.location.href="/auth/login"
+    //     window.location.href="/user/login"
     // })
     // .catch(function onError(err){
     //     alert(err.response.data.message)

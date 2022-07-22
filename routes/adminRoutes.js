@@ -1,11 +1,18 @@
 const {Router} = require("express")
 const router = Router()
 
-const authController = require("../controllers/authController")
+const userController = require("../controllers/userController")
 const adminController = require("../controllers/adminController")
 
 /*** EJS Router ***/
+router.route("/login")
+    .get(adminController.login)
 
+    router.route("/loginValidation")
+    .post(adminController.loginValidation)
+    router.route("/dashboard")
+    .get(adminController.admin_dashboard)
+    
 // Renders all customers page
 router.get("/showAllCustomers", (req,res)=>{
     res.render('customers.ejs')
@@ -30,12 +37,12 @@ router.route("/dashboard")
 // Handler for - "/addProperty"
 router.route("/addProperty")
     .get(adminController.getAddProperty)
-    .post(authController.protect, adminController.postAddProperty)
+    .post(userController.protect, adminController.postAddProperty)
 
 // Handler for - "/allCustomers"
 router.route("/allCustomers")
     .get(adminController.getAllCustomers)
-    // .post(authController.protect, adminController.postAddProperty)
+    // .post(userController.protect, adminController.postAddProperty)
 
 // Handler for - "/customer/{specific customer ID(number)}"
 router.route("/customer/:customerId")

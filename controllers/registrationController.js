@@ -1,5 +1,4 @@
 const Customer = require("../models/Customer")
-const Address = require("../models/Address")
 const Property = require("../models/Property")
 const User = require("../models/User")
 const AppError = require("../utils/appError")
