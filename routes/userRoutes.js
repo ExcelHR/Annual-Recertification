@@ -36,27 +36,36 @@ const mongodb_uri=process.env.DATABASE_LOCAL
 const storage = new GridFsStorage({
     url: mongodb_uri,
     file: (req, file) => {
-       console.log(req)
+       console.log(file)
       return new Promise((resolve, reject) => {
-        console.log('sadfg')
         crypto.randomBytes(16, (err, buf) => {
           if (err) {
             print(err)
             return reject(err);
-        console.log('sadfg')
           }
-        console.log('sadfg')
         const filename = buf.toString('hex') + path.extname(file.originalname);
           const fileInfo = {
             filename: filename,
             bucketName: 'Documents'
           };
+          console.log(fileInfo)
           resolve(fileInfo);
         });
       });
     }
   });
   const upload = multer({ storage,dest:'Documents' });
+const fields=[]
+for (let i=0;i<2;i++){
+    fields.push({name:`Document${i+1}`})
+}
+  app.route('/storeDocuments')
+  .post( upload.fields(fields),userController.storeDocuments)
+  app.route('/saveDetails')
+  .post( upload.fields(fields),userController.saveDetails)
 
-  app.route('/storeDocuments').post( upload.single('Document1'),userController.storeDocuemtns)
+  app.route('/updateVerificationStatus')
+  .post( upload.fields(fields),userController.updateVerificationStatus)
+
+
 module.exports=app;

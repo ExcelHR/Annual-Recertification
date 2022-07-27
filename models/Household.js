@@ -2,136 +2,104 @@
 // Database model design for an application(customer).
 
 
-const {model, Schema} = require("mongoose")
+const { model, Schema } = require("mongoose")
 
 const HouseholdSchema = new Schema({
-    userId:{
-        type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
-    },
-    visitInformation:{
-        type: String,
-        required: true
-    },
-    building:{
-        type: String,
-        required: true
-    },
-    apartmentNumber:{
-        type:Number,
-        required: true
-    },
-    requiredLeaseDate:{
-        type: Date,
-        // required: true
-    },
-    leaseTerm:{
-        type: Number,
-        required: true,
-        enum:[1,2]
-    },
-    name:{
-        firstName:{
-            type:String,
+  
+    // visitInformation:{
+    //     type: String,
+    //     required: true
+    // },
+    // building:{
+    //     type: String,
+    //     required: true
+    // },
+    // apartmentNumber:{
+    //     type:Number,
+    //     required: true
+    // },
+    // requiredLeaseDate:{
+    //     type: Date,
+    //     // required: true
+    // },
+    // leaseTerm: {
+    //     type: Number,
+    //     required: true,
+    //     enum: [1, 2]
+    // },
+    name: {
+        firstName: {
+            type: String,
             required: true
         },
-        middleName:{
-            type:String,
+        middleName: {
+            type: String,
             default: ""
         },
-        lastName:{
-            type:String,
+        lastName: {
+            type: String,
             required: true
         }
     },
-    dob:{
+    dob: {
         type: Date,
-        // required:true
+        required: true
     },
-    ssn:{
-        type:String,
-        unique:true
+    // ssn:{
+    //     type:String,
+    //     unique:true
+    // },
+    // ssnExists:{
+    //     type: Boolean,
+    //     // required: true
+    // },
+    phoneNumber: {
+        type: Number,
+        required: true,
     },
-    ssnExists:{
-        type: Boolean,
-        // required: true
+    // applicantType: {
+    //     type: String,
+    //     // required:true,
+    //     enum: ["tenant", "occupant", "gurantor"]
+    // },
+    documents: [
+        {
+            fileName: String,
+            originalName: String,
+            comment: String,
+            verificationStatus: String,
+            uploaded:Boolean
+        }],
+    property: {
+        type: String
     },
-    phoneNumber:{
-        type:Number,
-        // required:true,
-        unique:true
-    },
-    applicantType:{
-        type:String,
-        // required:true,
-        enum:["tenant","occupant","gurantor"]
-    },
-   
-    currentAddress:{
-        buildingName:{
-            type:String
-        },
-        Street:{
-            type:String
-        },
-        Zip:{
-            type:Number
-        },
-        city:{
-            type:String
-        },
-        state:{
-            type:String
-        }
-    },
-    verificationStatus:{
-        type:String,
-        enum:["pending","approved","rejected"]
-    },
-    documents:{
-            document1:{
-                name: String,
-                desc: String,
-                doc1:
-                {
-                    data: Buffer,
-                    contentType: String
-                }
-            }
-    },
-    comments:{
-        comment1:{
-            type: String
-        },
-        comment2:{
-            type: String
-        },
-        comment3:{
-            type: String
-        },
-        comment4:{
-            type: String
-        },
-        comment5:{
-            type: String
-        },
-        comment6:{
-            type: String
-        },
-        comment7:{
-            type: String
-        },
-        comment8:{
-            type: String
-        },
-        comment9:{
-            type: String
-        },
-        comment10:{
-            type: String
-        }
-    },
+    unit: {
+        type: Number
+    }
+
+    // currentAddress:{
+    //     buildingName:{
+    //         type:String
+    //     },
+    //     Street:{
+    //         type:String
+    //     },
+    //     Zip:{
+    //         type:Number
+    //     },
+    //     city:{
+    //         type:String
+    //     },
+    //     state:{
+    //         type:String
+    //     }
+    // },
+    // verificationStatus:{
+    //     type:String,
+    //     enum:["pending","approved","rejected"]
+    // },
+
+
     // currentinternationaladdress:{
     //     type:Boolean,
     //     required:true,
@@ -217,7 +185,7 @@ const HouseholdSchema = new Schema({
     //         type:String
     //     }
     // },
-    
+
     // newFile:{
     //     rentalDocument1:{
     //         type:Boolean,
@@ -309,4 +277,4 @@ const HouseholdSchema = new Schema({
     // }
 })
 
-module.exports=model("Household",HouseholdSchema)
+module.exports = model("Household", HouseholdSchema)

@@ -29,7 +29,15 @@ const  Grid  = require("gridfs-stream")
 
 const mongodb_uri=process.env.DATABASE_LOCAL
 const port=process.env.PORT
-
+const MongoConn=async(conn)=>{
+    let gfs
+    await conn.once('open', ()=>{
+        console.log("DB is opened")
+        gfs=Grid(conn.db,mongoose.mongo)
+        gfs.collection('Documents')
+    })
+    return gfs
+}
 const app=express();
 (async()=>{
     try{
@@ -38,13 +46,10 @@ const app=express();
         console.log(" Database connection successfull!")
         // Create an admin user if not present
         await configDB()
-        const conn=mongoose.createConnection(mongodb_uri)
-        let gfs
-        conn.once('open',()=>{
-            console.log("DB is opened")
-            gfs=Grid(conn.db,mongoose.mongo)
-            gfs.collection('Documents')
-        })
+    const conn=mongoose.createConnection(mongodb_uri)
+        
+        return MongoConn(conn)
+        
     }catch(error){
         console.log(error)
     }
@@ -90,3 +95,5 @@ app.use(globalErrorController.error)
 app.use(globalErrorController.pageNotFound)
 // App listens on a given port
 app.listen(port)
+// exports.gfs={gfs}
+exports.MongoConn=MongoConn

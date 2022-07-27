@@ -16,8 +16,8 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="/css/login.css">
 
+    <link rel="stylesheet" type="text/css" href="/css/admin_dashboard.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark navbar bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark navbar bg-dark mb-3">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@
             <ul class="navbar-nav ml-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8000">Logout</a>
+                    <a class="nav-link" href="http://localhost:8000/admin/login">Logout</a>
                 </li>
             </ul>
 
@@ -59,40 +59,13 @@
 <main class="login-form">
     <div class="cotainer">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-center"><h2>Unit Details</h2></div>
+            <div class="col-md-10">
+                <div class="card" id="card">
+                    <div class="card-header d-flex justify-content-center" ><h2 id="HouseholdName"></h2></div>
                     <br>
-                    <div class="card mx-auto " style="width: 18rem;margin-bottom: 3rem;">
-                        <div class="card-header">
-                          <p id="name" class="card-text d-flex justify-content-center ">VERMONT CITY LIGHTS II</p>
-                          </div>
-                        <img class="card-img-top" src="https://images1.loopnet.com/i2/rg7ixHhoSnT-FPIgrhMUEpL4IfyeIdqzvweXQslLSI0/106/multifamily-property-for-sale-8819-reading-ave-los-angeles-ca-90045.jpg" alt="Card image cap">
-                        <div class="card-body">
-                          <p id="address1" class="card-text d-flex justify-content-center">500 UNION DR. Unit 357</p>
-                          <p id="address2"class="card-text d-flex justify-content-center">LOS ANGELES 90017 CA</p>
-                        </div>
-                      </div>
+                  
 
-                    <div class="alert alert-danger" role="alert">
-                       You have received the second AR notice
-                      </div><div class="alert alert-danger" role="alert">
-                        You have received the first AR notice
-                      </div>             
-                      <div class="alert alert-warning" role="alert">
-                        The deadline for uploading documents is 08/01/2022
-                      </div> 
-                    <div class="card-body">
-                        <form id="myForm"  method="POST" >
-                           
-                                
-
-                            <p class="text-dark d-flex justify-content-center">Click on the upload button below to upload the documents</p>
-                            <div class="col-md-10 offset-md-5">
-
-                                <button id="submitBtn" type="submit" class="btn btn-primary">
-                                    Upload
-                                </button>
+                
                                 
                             </div>
                     </div>
@@ -112,7 +85,7 @@
 
 
 </body>
-<script type="text/javascript" src="/js/user_dashboard.js" ></script>
+<script type="text/javascript" src="/js/showDocuments.js" ></script>
 
     <%- include('footer'); -%>
     

@@ -1,34 +1,35 @@
 const bcrypt = require("bcryptjs")
-const User = require("../models/User")
+const Household = require("../models/Household")
 const Customer = require("../models/Customer")
 const AppError = require("../utils/appError")
 const { deleteFiles } = require("../utils/fileUtil")
-const Admin=require("../models/Admin")
+const  Grid  = require("gridfs-stream")
+const Admin = require("../models/Admin")
 const moment = require("moment-timezone")
 const mongoose = require("mongoose")
 
-exports.login= async(req,res,next)=>{
+exports.login = async (req, res, next) => {
     res.render('admin_login')
 }
-exports.admin_dashboard = async(req,res,next)=>{
+exports.admin_dashboard = async (req, res, next) => {
     res.render('admin_dashboard')
 }
-exports.loginValidation= async(req,res,next)=>{
+exports.loginValidation = async (req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     console.log("backend")
-    const {email,password} =req.body
+    const { email, password } = req.body
     console.log(req.body)
     let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
-    let admin = await Admin.findOne({email})
-    if (!admin ){
-            console.log("No admin found")
-            return next(new AppError("No admin with this adminname exists.",400))
+    let admin = await Admin.findOne({ email })
+    if (!admin) {
+        console.log("No admin found")
+        return next(new AppError("No admin with this adminname exists.", 400))
     }
-    let match = await bcrypt.compare(password,admin.password)
-    if(!match){
-        return next(new AppError("Password incorrect. Please enter the correct password",400))
+    let match = await bcrypt.compare(password, admin.password)
+    if (!match) {
+        return next(new AppError("Password incorrect. Please enter the correct password", 400))
     }
-    res.send("Validated")
+    res.send(admin._id)
 };
 // utitlity function for deleting documents.
 async function unlinkUploadedFiles({ files = {} }) {
@@ -43,9 +44,69 @@ exports.getDashboard = async (req, res, next) => {
 
 // Render add property page
 exports.getAddProperty = async (req, res, next) => {
+    console.log("getAddProperty")
     res.render("newProperty")
 }
 
+exports.showDocuments = async (req, res, next) => {
+    console.log("Show Documents")
+    console.log(req.query.id)
+    res.render('show_Documents')
+}
+
+exports.getHouseholdInfo = async (req, res, next) => {
+    console.log("getHouseholdInfo")
+    adminId=req.query.id
+    console.log(adminId)
+    const admin=await Admin.find({_id:adminId})
+    const units=admin[0].units
+    const household_details=[]
+    try{
+          for(let i=0;i<units.length;i++) { 
+          const household=await Household.find({unit:units[i]})
+          console.log(household)
+          for(let j=0;j<household.length;j++) { 
+            console.log(household[j])
+            let property=household[j].property
+          household_details.push({houshold_id:household[j]._id,name:`${household[j].name.firstName} ${household[j].name.middleName} ${household[j].name.lastName} `,dob:household[j].dob.toISOString().substring(0, 10),property,unit:units[i],documents:household[j].documents})
+          }
+        }
+          console.log(household_details)
+          res.send(household_details)
+    }
+    catch(e){
+        console.log("Error")
+        console.log(e)
+        res.status(400).send({message:"Something went wrong" ,status:404,error:true})
+    }
+}
+
+exports.getDocuments = async (req, res, next) => {
+    console.log("getDocuments")
+    userId=req.query.id
+    console.log(userId)
+    const household=await Household.find({_id:userId})
+    console.log(household)
+    docs=household[0].documents
+    console.log(JSON.stringify(docs))
+    const name=household[0].name
+   documents=[]
+    try{
+          
+          for(let j=0;j<docs.length;j++) { 
+            documents.push({fileName:docs[j].fileName,originalName:docs[j].originalName})
+          }
+    response={documents,name,id:userId}
+    console.log(response)
+          res.send(response)
+        }
+    
+    catch(e){
+        console.log("Error")
+        console.log(e)
+        res.status(400).send({message:"Something went wrong" ,status:404,error:true})
+    }
+}
 // Function: Create a property on the portal that the user can select.
 exports.postAddProperty = async (req, res, next) => {
     // Take the user-entered input from the request body
@@ -97,6 +158,31 @@ exports.getCustomer = async (req, res, next) => {
         status: "success",
         data: customer
     })
+};
+exports.getFile = async (req, res, next) => {
+    // Get the customer Id
+    console.log('Get File')
+    const mongodb_uri = process.env.DATABASE_LOCAL
+    const conn = mongoose.createConnection(mongodb_uri)
+    let gfs
+    await conn.once('open', () => {
+        console.log("DB is opened")
+        gfs = Grid(conn.db, mongoose.mongo)
+        gfs.collection('Documents')
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        if (err) {
+            return res.status(404).send({ err: "No files found" })
+        }
+        else {
+            const readstream=gfs.createReadStream(file.filename)
+            readstream.pipe(res)
+            // res.send(file)
+        }
+    })
+    })
+    
+    // Fetch the customer based on customer Id
+   
 };
 
 // Function: Sets the document verification state

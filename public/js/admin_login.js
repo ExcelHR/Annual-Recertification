@@ -36,9 +36,9 @@ form.addEventListener("submit", async function (e) {
     try {
         const res = await axios.post("/admin/loginValidation", { email, password })
         console.log(res)
-        if (res.data=="Validated") {
+        if (res.data) {
             console.log("Success")
-                window.location.replace('/admin/dashboard')
+                window.location.href=`/admin/dashboard/?id=${res.data}`
         }
     }
     catch (err) {

@@ -5,6 +5,7 @@ const Customer = require("../models/Customer")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const AppError = require("../utils/appError")
+const Household=require('../models/Household')
 
 
 // const router=Router();
@@ -70,6 +71,7 @@ exports.login= async(req,res,next)=>{
     let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
 
     let user = await User.findOne({email})
+    
     if (!user ){
             console.log("No user found")
             return next(new AppError("No user with this username exists.",400))
@@ -168,8 +170,72 @@ exports.upload_documents = async(req,res,next)=>{
     res.render('documents_upload')
 }
 
-exports.storeDocuemtns =async(req,res,next)=>{
-    console.log(req.file)
-    res.json({file:req.file})
+exports.storeDocuments =async(req,res,next)=>{
+    console.log(req.body)
+    console.log(req.files)
+    res.send({file:req.files})
+}
+exports.saveDetails =async(req,res,next)=>{
+    
+    console.log("Save Details")
+    userData=req.body
+    console.log(JSON.stringify(userData))
+    let household=new Household(userData)
+    resp=await household.save()
+    console.log(resp)
+        if (resp){
+            console.log("Data Saved")
+            res.send(resp)
+        }
+        else{
+            res.send({error:"Unsuccessful"})
+        }
+    
+    res.send()
 }
 
+exports.updateVerificationStatus =async(req,res,next)=>{
+    
+    console.log("updateVerificationStatus ")
+    docInfo=req.body
+    console.log(JSON.stringify(docInfo))
+    try{
+    resp=await Household.find({_id:docInfo.userId})
+    const documents=resp[0].documents
+    docInd=docInfo.originalName.slice(-1)
+    if(docInfo.verificationStatus=="Rejected"){
+        documents[docInd-1]["verificationStatus"]="Rejected"
+        documents[docInd-1]["comment"]=docInfo.comment
+    }
+    if(docInfo.verificationStatus=="Approved"){
+        documents[docInd-1]["verificationStatus"]="Approved"
+        documents[docInd-1]["comment"]="This Document is good to go !!"
+    }
+    console.log(documents)
+    resp=await Household.updateOne(
+        {_id: docInfo.userId}, 
+        {$set: {'documents':documents}})
+        console.log(resp)
+    res.send("Status Updated")
+
+
+    
+    }
+    catch(e){
+        console.log(e)
+    res.send(e)
+
+    }
+    }
+   
+    // resp=await household.save()
+    // console.log(resp)
+    //     if (resp){
+    //         console.log("Data Saved")
+    //         res.send(resp)
+    //     }
+    //     else{
+    //         res.send({error:"Unsuccessful"})
+    //     }
+    
+    // res.send()

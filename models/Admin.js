@@ -18,7 +18,10 @@ const AdminSchema = new Schema({
         type:String,
         default:"Admin",
         enum:["MasterAdmin","Admin"]
-    }
+    },
+    units:[
+        {type:Number}
+    ]
 })
 
 module.exports=model("Admin",AdminSchema)
