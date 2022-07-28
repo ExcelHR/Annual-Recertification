@@ -141,9 +141,11 @@ const docsReviewed=async(userId,verificationStatus,originalName)=>{
     
     if(verificationStatus=="Rejected"){
          comment=document.getElementById("comments").value
+         console.log(comment)
 
         }
 const docInfo={userId,verificationStatus,comment,originalName}
+console.log(docInfo)
 const resp=await axios.post('/user/updateVerificationStatus',docInfo)
 console.log(resp)
 

@@ -6,6 +6,7 @@ form.addEventListener("submit", async function (e) {
     console.log("Submiotted")
     const formData = new FormData();
     var inputs = document.getElementsByTagName('input');
+    const userId=window.location.search.split("=")[1]
 
     for(var i = 0; i < inputs.length; i++) {
         
@@ -23,13 +24,13 @@ form.addEventListener("submit", async function (e) {
             console.log(res)
             let files=Object.keys(res.data.file)
             console.log(files)
-            firstName="Shrey"
-            middleName="Harsh"
+            firstName="Disheen"
+            middleName="Vinay"
             lastName="Solanki"
             dob=new Date("1998/11/02")
             phoneNumber=2135435654
             unit=357,
-            property="VERMONT CITY LIGHTS II"
+            property="Vermont City Lights II"
             //API call to DB ro get user Details
             
             for(let i=0;i<files.length;i++){
@@ -41,6 +42,7 @@ form.addEventListener("submit", async function (e) {
             }
             console.log(documents)
             let householdData={
+                userId,
                 name:{
                     firstName,
                     middleName,
@@ -57,14 +59,14 @@ form.addEventListener("submit", async function (e) {
             if (resp.data){
                 console.log(resp)
                 alert("Congratulations!! Your Documents have been submitted. Thank You")
-                window.location.href=`/user/dashboard`
+                window.location.href=`/user/dashboard${userId}`
             }
             
         }
     }
     catch (err) {
         console.log(err+"Please try again")
-        window.location.href=`/user/upload_documents`
+        window.location.href=`/user/upload_documents/?=${userId}`
         alert(err.message)
     }
 })

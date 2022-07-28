@@ -36,7 +36,7 @@ const mongodb_uri=process.env.DATABASE_LOCAL
 const storage = new GridFsStorage({
     url: mongodb_uri,
     file: (req, file) => {
-       console.log(file)
+       console.log(req.query.id)
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
           if (err) {
@@ -56,7 +56,7 @@ const storage = new GridFsStorage({
   });
   const upload = multer({ storage,dest:'Documents' });
 const fields=[]
-for (let i=0;i<2;i++){
+for (let i=0;i<3;i++){
     fields.push({name:`Document${i+1}`})
 }
   app.route('/storeDocuments')
@@ -67,5 +67,13 @@ for (let i=0;i<2;i++){
   app.route('/updateVerificationStatus')
   .post( upload.fields(fields),userController.updateVerificationStatus)
 
+  app.route("/getVerifiedDocuments")
+.get(userController.getVerifiedDocuments)
+
+app.route('/reuploadDocuments')
+  .post( upload.fields(fields),userController.reuploadDocuments)
+
+  app.route('/updateDocumentsData')
+  .post( upload.fields(fields),userController.updateDocumentsData)
 
 module.exports=app;

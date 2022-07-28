@@ -38,7 +38,7 @@ form.addEventListener("submit", async function (e) {
         console.log(res.data)
         if (res.data) {
             console.log("Success")
-                window.location.href=`/user/dashboard`
+                window.location.href=`/user/dashboard/?id=${res.data.userId}`
         }
     }
     catch (err) {
@@ -51,5 +51,5 @@ form.addEventListener("submit", async function (e) {
 // Redirect to forget password page
 forgotPassword.onclick = function (e) {
     e.preventDefault();
-    window.location.href = "/user/forgot-password"
+    window.location.href = "/user/forgot-password?id=${res.data.userId}"
 }

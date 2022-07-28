@@ -175,6 +175,47 @@ exports.storeDocuments =async(req,res,next)=>{
     console.log(req.files)
     res.send({file:req.files})
 }
+
+exports.updateDocumentsData =async(req,res,next)=>{
+    console.log(req.body)
+    _id=req.query.id
+    document=req.body
+    console.log(_id)
+    const household=await Household.find({_id})
+        console.log(household)
+        const docInd=document.originalName.slice(-1)-1
+        const oldDoc=household[0].documents
+        console.log(oldDoc)
+        const updatedDoc=[]
+        oldDoc.forEach(doc=>{
+                if (doc.originalName==document.originalName){
+                        updatedDoc.push(document)
+                }
+                else{
+                    updatedDoc.push(doc)
+                }
+               
+        })
+        resp=await Household.updateOne(
+            {_id}, 
+            {$set: {'documents':updatedDoc}})
+            console.log(resp)
+    }
+
+exports.reuploadDocuments =async(req,res,next)=>{
+    console.log("reuploadDocuments")
+    let files=Object.keys(req.files)
+    const householdId=req.query.id
+    console.log(householdId)
+    res.send({file:req.files})
+//   const household=await Household.find({_id:householdId})
+//     console.log(household)
+//    console.log(documents)
+//    const docInd=documents.originalName.splice(-1)
+//    console.log(docInfo)
+//    const oldDoc=household.
+
+}
 exports.saveDetails =async(req,res,next)=>{
     
     console.log("Save Details")
@@ -209,7 +250,7 @@ exports.updateVerificationStatus =async(req,res,next)=>{
     }
     if(docInfo.verificationStatus=="Approved"){
         documents[docInd-1]["verificationStatus"]="Approved"
-        documents[docInd-1]["comment"]="This Document is good to go !!"
+        documents[docInd-1]["comment"]="This document is good to go !!"
     }
     console.log(documents)
     resp=await Household.updateOne(
@@ -227,15 +268,16 @@ exports.updateVerificationStatus =async(req,res,next)=>{
 
     }
     }
-   
-    // resp=await household.save()
-    // console.log(resp)
-    //     if (resp){
-    //         console.log("Data Saved")
-    //         res.send(resp)
-    //     }
-    //     else{
-    //         res.send({error:"Unsuccessful"})
-    //     }
-    
-    // res.send()
+    exports.getVerifiedDocuments =async(req,res,next)=>{
+       console.log("getVerifiedDocuments")
+       const userId=req.query.id
+       console.log(userId)
+       try{
+       docs=await Household.find({userId})
+       console.log(docs)
+       res.send(docs)
+       }
+       catch(e){
+        res.send(e)
+       }
+    }

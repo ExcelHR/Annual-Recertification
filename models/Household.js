@@ -27,6 +27,9 @@ const HouseholdSchema = new Schema({
     //     required: true,
     //     enum: [1, 2]
     // },
+    userId:{
+        type:String
+    },
     name: {
         firstName: {
             type: String,
