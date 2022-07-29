@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "62e17bd41c4eac56f4e2f671"
+  },
+  "name": {
+    "middleName": "Harsh",
+    "firstName": "Shrey",
+    "lastName": "Solanki"
+  },
+  "userId": "62d9a71f39e74dd87d064ec5",
+  "dob": {
+    "$date": {
+      "$numberLong": "909993600000"
+    }
+  },
+  "phoneNumber": 2135435654,
+  "documents": [
+    {
+      "_id": {
+        "$oid": "62e17bd41c4eac56f4e2f672"
+      },
+      "fileName": "417345c6cb49b67b97d8e767140c6922.pdf",
+      "comment": "This Document is good to go !!",
+      "verificationStatus": "Approved",
+      "originalName": "Document1"
+    },
+    {
+      "_id": {
+        "$oid": "62e2b21c4a3db02c5c192431"
+      },
+      "fileName": "ced7a6448f8b573d11a8390525b49fe6.pdf",
+      "comment": "Incorrect Dates",
+      "verificationStatus": "Rejected",
+      "originalName": "Document2"
+    },
+    {
+      "_id": {
+        "$oid": "62e17bd41c4eac56f4e2f674"
+      },
+      "fileName": "3f81850b5da93d748f8f2d5860199c49.pdf",
+      "comment": "This Document is good to go !!",
+      "verificationStatus": "Approved",
+      "originalName": "Document3"
+    }
+  ],
+  "property": "VERMONT CITY LIGHTS II",
+  "unit": 357,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62e18565990b191788873b87"
+  },
+  "name": {
+    "middleName": "Vinay",
+    "firstName": "Disheen",
+    "lastName": "Solanki"
+  },
+  "userId": "62d9a71f39e74dd87d064ec5",
+  "dob": {
+    "$date": {
+      "$numberLong": "909993600000"
+    }
+  },
+  "phoneNumber": 2135435654,
+  "documents": [
+    {
+      "_id": {
+        "$oid": "62e309ef2bbd90463c5a1b3c"
+      },
+      "fileName": "69eb28a8adae5f36aa65321eb7111cf7.pdf",
+      "comment": "Missing Signature",
+      "verificationStatus": "Rejected",
+      "originalName": "Document1"
+    },
+    {
+      "_id": {
+        "$oid": "62e465a9b1eca233e4c0325b"
+      },
+      "fileName": "151d660d668ed7a79c5cb927b6b53ba3.pdf",
+      "comment": "This document is good to go !!",
+      "verificationStatus": "Approved",
+      "originalName": "Document2"
+    },
+    {
+      "_id": {
+        "$oid": "62e2ddc0155131294c95bd9b"
+      },
+      "fileName": "5696dad28aea7988fec2479729ce687c.pdf",
+      "comment": "Incorrect Document",
+      "verificationStatus": "Rejected",
+      "originalName": "Document3"
+    }
+  ],
+  "property": "VERMONT CITY LIGHTS II",
+  "unit": 357,
+  "__v": 0
+}]

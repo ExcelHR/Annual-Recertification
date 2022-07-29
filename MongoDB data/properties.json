@@ -1,0 +1,391 @@
+[{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d28"
+  },
+  "Code": 445,
+  "Property": "THE CREST APARTMENTS",
+  "Address": "13950 FOOTHILL BLVD.",
+  "City": "SYLMAR",
+  "Zip": 91342,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d29"
+  },
+  "Code": 455,
+  "Property": "PALM TERRACE",
+  "Address": "15116 PARTHENIA ST.",
+  "City": "NORTH HILLS",
+  "Zip": 91343,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2a"
+  },
+  "Code": 3950,
+  "Property": "VERMONT CITY LIGHTS II",
+  "Address": "500 UNION DR.",
+  "City": "LOS ANGELES",
+  "Zip": 90017,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2b"
+  },
+  "Code": 4000,
+  "Property": "VERMONT CITY LIGHTS I",
+  "Address": "4215 S VERMONT AVE.",
+  "City": "LOS ANGELES",
+  "Zip": 90037,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2c"
+  },
+  "Code": 4050,
+  "Property": "COURTLAND CITY LIGHTS",
+  "Address": "1355 W. COURT ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90026,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2d"
+  },
+  "Code": 4150,
+  "Property": "HUNTINGTON HACIENDA 1",
+  "Address": "4688 S HUNTINGTON DR.",
+  "City": "LOS ANGELES",
+  "Zip": 90032,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2e"
+  },
+  "Code": 4200,
+  "Property": "ADAMS CITY LIGHTS",
+  "Address": "4471 W. ADAMS BLVD.",
+  "City": "LOS ANGELES",
+  "Zip": 90016,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d2f"
+  },
+  "Code": 4250,
+  "Property": "ANGELS CITY LIGHTS",
+  "Address": "13915 W. OXNARD ST.",
+  "City": "VAN NUYS",
+  "Zip": 91401,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d30"
+  },
+  "Code": 4300,
+  "Property": "BEVERLY CITY LIGHTS",
+  "Address": "107 S CARONDELET ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90057,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d31"
+  },
+  "Code": 4350,
+  "Property": "BROADWAY VISTA",
+  "Address": "9800 S. BROADWAY",
+  "City": "LOS ANGELES",
+  "Zip": 90003,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d32"
+  },
+  "Code": 4400,
+  "Property": "COCHRAN CITY LIGHTS",
+  "Address": "1315 S COCHRAN AVE.",
+  "City": "LOS ANGELES",
+  "Zip": 90019,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d33"
+  },
+  "Code": 4450,
+  "Property": "GARLAND CITY LIGHTS",
+  "Address": "1209 W. 8TH ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90017,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d34"
+  },
+  "Code": 4500,
+  "Property": "GATEWAY CITY LIGHTS",
+  "Address": "522 W. 127TH ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90044,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d35"
+  },
+  "Code": 4550,
+  "Property": "GRANDVIEW CITY LIGHTS",
+  "Address": "831-837 GRANDVIEW ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90057,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d36"
+  },
+  "Code": 4600,
+  "Property": "HAPPY VALLEY CITY LIGHTS",
+  "Address": "2580 N. SOTO ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90032,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d37"
+  },
+  "Code": 4650,
+  "Property": "MELROSE APARTMENTS",
+  "Address": "4444 N. 7TH AVE.",
+  "City": "PHOENIX",
+  "Zip": 85013,
+  "State": "AZ"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d38"
+  },
+  "Code": 4700,
+  "Property": "WESTLAKE CITY LIGHTS",
+  "Address": "509 WESTLAKE AVE.",
+  "City": "LOS ANGELES",
+  "Zip": 90057,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d39"
+  },
+  "Code": 4750,
+  "Property": "WILSHIRE CITY LIGHTS",
+  "Address": "716 S. CARONDELET ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90057,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3a"
+  },
+  "Code": 4800,
+  "Property": "WITMER CITY LIGHTS",
+  "Address": "319 S WITMER ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90017,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3b"
+  },
+  "Code": 4850,
+  "Property": "MISSION CITY LIGHTS",
+  "Address": "9121 N. SEPULVEDA  BLVD.",
+  "City": "NORTH HILLS",
+  "Zip": 91343,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3c"
+  },
+  "Code": 4900,
+  "Property": "RAINTREE",
+  "Address": "1058 S. WINCHESTER BLVD.",
+  "City": "SAN JOSE",
+  "Zip": 95128,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3d"
+  },
+  "Code": 4950,
+  "Property": "SAGEWOOD",
+  "Address": "16217 STONEBRIDGE PARKWAY",
+  "City": "SAN DIEGO",
+  "Zip": 92131,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3e"
+  },
+  "Code": 5000,
+  "Property": "ATRIUM COURT",
+  "Address": "3801 DUCKHORN DR.",
+  "City": "SACRAMENTO",
+  "Zip": 95834,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d3f"
+  },
+  "Code": 5050,
+  "Property": "SPRINGBROOK GROVE",
+  "Address": "435 ALTURAS ROAD",
+  "City": "FALLBROOK",
+  "Zip": 92028,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d40"
+  },
+  "Code": 5100,
+  "Property": "GENEVA VILLAGE",
+  "Address": "1550 E. CHURCH AVE.",
+  "City": "FRESNO",
+  "Zip": 93706,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d41"
+  },
+  "Code": 5150,
+  "Property": "TANAGER SPRINGS I",
+  "Address": "2187 S. MAPLE AVE.",
+  "City": "FRESNO",
+  "Zip": 93725,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d42"
+  },
+  "Code": 5200,
+  "Property": "TANAGER SPRINGS II",
+  "Address": "2123 S. MAPLE AVE.",
+  "City": "FRESNO",
+  "Zip": 93725,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d43"
+  },
+  "Code": 5250,
+  "Property": "ALAMEDA TERRACE",
+  "Address": "11919 S. FIGUEROA ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90061,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d44"
+  },
+  "Code": 5300,
+  "Property": "FIGUEROA PLACE",
+  "Address": "1320 W. SUNSET BLVD.",
+  "City": "LOS ANGELES",
+  "Zip": 90026,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d45"
+  },
+  "Code": 5350,
+  "Property": "HARVARD CIRCLE",
+  "Address": "952 N. HARVARD BLVD.",
+  "City": "LOS ANGELES",
+  "Zip": 90029,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d46"
+  },
+  "Code": 5400,
+  "Property": "MAIN STREET VISTAS",
+  "Address": "5950 S. MAIN ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90003,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d47"
+  },
+  "Code": 5450,
+  "Property": "MENLO PARK",
+  "Address": "831 W. 70TH ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90044,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d48"
+  },
+  "Code": 5500,
+  "Property": "THE MEDITERRANEAN",
+  "Address": "1800 W. TEMPLE ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90026,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d49"
+  },
+  "Code": 5550,
+  "Property": "VALLEY VIEW",
+  "Address": "9015 ORION AVE.",
+  "City": "NORTH HILLS",
+  "Zip": 91343,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d4a"
+  },
+  "Code": 5600,
+  "Property": "CORTEZ CITY LIGHTS",
+  "Address": "1612-1620 W CORTEZ ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90026,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d4b"
+  },
+  "Code": 5650,
+  "Property": "RUNNYMEDE SPRINGS",
+  "Address": "20422 COHASSET ST.",
+  "City": "WINNETKA",
+  "Zip": 91306,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d4c"
+  },
+  "Code": 5700,
+  "Property": "STUDIO POINTE (WILTON)",
+  "Address": "915 N. WILTON PLACE",
+  "City": "LOS ANGELES",
+  "Zip": 90038,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d4d"
+  },
+  "Code": 5750,
+  "Property": "SONOMA APT",
+  "Address": "38551/38561 11TH ST. EAST",
+  "City": "PALMDALE",
+  "Zip": 93550,
+  "State": "CA"
+},{
+  "_id": {
+    "$oid": "62d9b0fb7e920e25027c6d4e"
+  },
+  "Code": 5800,
+  "Property": "YALE TERRACE",
+  "Address": "716 YALE ST.",
+  "City": "LOS ANGELES",
+  "Zip": 90012,
+  "State": "CA"
+}]

@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "62d9a71f39e74dd87d064ec5"
+  },
+  "email": "admin@gmail.com",
+  "password": "$2a$12$vWQ3ZgLr0k5ZHLEY7yBM5OHcVuIozS6DrFSXAVhcpv/ihgl8U3Myq",
+  "units": [
+    357
+  ],
+  "__v": 0
+}]
