@@ -24,8 +24,8 @@ form.addEventListener("submit", async function (e) {
             console.log(res)
             let files=Object.keys(res.data.file)
             console.log(files)
-            firstName="Disheen"
-            middleName="Vinay"
+            firstName="Kabir"
+            middleName="Raj"
             lastName="Solanki"
             dob=new Date("1998/11/02")
             phoneNumber=2135435654
@@ -59,7 +59,7 @@ form.addEventListener("submit", async function (e) {
             if (resp.data){
                 console.log(resp)
                 alert("Congratulations!! Your Documents have been submitted. Thank You")
-                window.location.href=`/user/dashboard${userId}`
+                window.location.href=`/user/dashboard/?id=${userId}`
             }
             
         }

@@ -94,7 +94,7 @@ exports.getDocuments = async (req, res, next) => {
     try{
           
           for(let j=0;j<docs.length;j++) { 
-            documents.push({fileName:docs[j].fileName,originalName:docs[j].originalName})
+            documents.push({fileName:docs[j].fileName,originalName:docs[j].originalName,status:docs[j].verificationStatus})
           }
     response={documents,name,id:userId}
     console.log(response)

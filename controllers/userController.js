@@ -200,6 +200,7 @@ exports.updateDocumentsData =async(req,res,next)=>{
             {_id}, 
             {$set: {'documents':updatedDoc}})
             console.log(resp)
+            res.send("Document Reuploaded")
     }
 
 exports.reuploadDocuments =async(req,res,next)=>{

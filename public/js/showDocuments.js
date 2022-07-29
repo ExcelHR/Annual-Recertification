@@ -16,7 +16,7 @@
 
 })()
 const displayTable = async (data,userId) => {
-    console.log(userId)
+    console.log(data)
     var table = document.createElement("table");
     table.setAttribute("class", " table table-hover pointer  ");
     table.setAttribute("id", " table");
@@ -43,6 +43,11 @@ const displayTable = async (data,userId) => {
     var th = document.createElement("th");
     th.setAttribute("scope", "col")
     th.appendChild(document.createTextNode('Document Preview'))
+    tr.appendChild(th)
+
+    var th = document.createElement("th");
+    th.setAttribute("scope", "col")
+    th.appendChild(document.createTextNode('Document Status'))
     tr.appendChild(th)
 
     var th = document.createElement("th");
@@ -90,10 +95,17 @@ const displayTable = async (data,userId) => {
         tr.appendChild(td)
 
         var td = document.createElement("td");
+        td.appendChild(document.createTextNode(data[i].status))
+        td.setAttribute("class", "align-middle ")
+        tr.appendChild(td)
+
+        var td = document.createElement("td");
         td.setAttribute("class", "align-middle")
         var button1 = document.createElement("button1")
         button1.setAttribute("class", "btn btn-success ")
         button1.setAttribute("type", "submit")
+
+        
 
         button1.innerHTML = "Approve"
         td.appendChild(button1)
@@ -117,7 +129,7 @@ const displayTable = async (data,userId) => {
         const input= document.createElement("INPUT");
         input.setAttribute("type", "text");
         input.setAttribute("placeholder", "Reason for rejecting");
-        input.setAttribute("id", "comments");
+        input.setAttribute("id", data[i].originalName+"_comments");
         input.setAttribute("name", "comments");
         input.setAttribute("class", "form-control");
         td.appendChild(input)
@@ -136,11 +148,16 @@ const getDocuments=async (id)=>{
 
 }
 const docsReviewed=async(userId,verificationStatus,originalName)=>{
-    alert(`Document ${verificationStatus}`)
+    console.log('docsReviewed')
+    console.log(verificationStatus)
     var comment
+    comment=document.getElementById(originalName+"_comments").value
+         console.log(comment)
+
+    alert(`Document ${verificationStatus}`)
     
     if(verificationStatus=="Rejected"){
-         comment=document.getElementById("comments").value
+         comment=document.getElementById(originalName+"_comments").value
          console.log(comment)
 
         }
@@ -148,5 +165,6 @@ const docInfo={userId,verificationStatus,comment,originalName}
 console.log(docInfo)
 const resp=await axios.post('/user/updateVerificationStatus',docInfo)
 console.log(resp)
+window.location.href=`/admin/showDocuments/?id=${userId}`
 
 }
