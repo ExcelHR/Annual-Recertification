@@ -51,7 +51,7 @@ const displayTable = (data, status, name,householdId) => {
     console.log(householdId)
     var table = document.createElement("table");
     table.setAttribute("class", " table table-hover pointer");
-    table.setAttribute("id", "table");
+    table.setAttribute("id", "table"+"_"+householdId);
 
     var thead = document.createElement("thead");
     var tr = document.createElement("tr");
@@ -135,7 +135,7 @@ const displayTable = (data, status, name,householdId) => {
             const input = document.createElement("INPUT");
             // input.setAttribute("type", "file");
             input.type="file"
-            input.setAttribute("id",data[i].originalName );
+            input.setAttribute("id",data[i].originalName+"_"+householdId );
             input.setAttribute("class", "form-control");
             
             // input.setAttribute("onclick", "uploadDoc()");    
@@ -169,25 +169,27 @@ const displayTable = (data, status, name,householdId) => {
     table.append(tbody)
     document.getElementById(status).appendChild(h3)
     document.getElementById(status).appendChild(table)
+    form2 = document.getElementById("myForm2");
+    console.log(form2.id)
+    form2.addEventListener("submit",  function (e) {
+        console.log("dad")
+           e.preventDefault();
+       })
 }
 
 
 const reuploadDocuments=async (fileName,householdId,status,i)=>{
     console.log("reuploadDocuments")
-    console.log(fileName)
-    console.log(householdId)
-    var inputs = document.getElementById(fileName);
+   
+    var inputs = document.getElementById(fileName+"_"+householdId);
+    console.log(inputs)
     console.log(inputs.files[0])
     const formData = new FormData();
-
-    
+   
            formData.append( inputs.name, inputs.files[0])
-           const form2 = document.getElementById("myForm2");
-           form2.addEventListener("submit", async function (e) {
-               e.preventDefault();
-           
-           })
-    
+           console.log(formData)
+          
+     
     
     // // // Make a backend API request to login to the system
     try {
@@ -202,10 +204,9 @@ const reuploadDocuments=async (fileName,householdId,status,i)=>{
             console.log(resp.data)
             if (resp.data){
                 alert("Thank you for reuploading the documents!!")
-                console.log(document.getElementById("table"))
-                document.getElementById("table").deleteRow(parseInt(i+1))
+                document.getElementById("table"+"_"+householdId).deleteRow(parseInt(i)+1)
                 if(i==0){
-                    document.getElementById("Rejected").innerHTML=`<h1 class="d-flex justify-content-center">No Rejeced Documents</h1>`
+                    document.getElementById("table"+"_"+householdId).innerHTML=`<h4 class="d-flex justify-content-center">No Rejeced Documents</h4>`
                 }
                         }
              
