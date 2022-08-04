@@ -126,6 +126,7 @@ const displayTable = (data, status, name,householdId) => {
             form.setAttribute("class", "form-inline mt-3")
             form.setAttribute("id", "myForm2")
             form.method="POST"
+            form.setAttribute("onsubmit","return false") 
             var div1 = document.createElement("div")
             div1.setAttribute("class", "form-group")
             var label = document.createElement("label")
@@ -169,18 +170,18 @@ const displayTable = (data, status, name,householdId) => {
     table.append(tbody)
     document.getElementById(status).appendChild(h3)
     document.getElementById(status).appendChild(table)
-    form2 = document.getElementById("myForm2");
-    console.log(form2.id)
-    form2.addEventListener("submit",  function (e) {
-        console.log("dad")
-           e.preventDefault();
-       })
+    
 }
 
 
 const reuploadDocuments=async (fileName,householdId,status,i)=>{
     console.log("reuploadDocuments")
-   
+    form2 = document.getElementById("myForm2");
+    console.log(form2)
+    form2.addEventListener("submit",  function (e) {
+        console.log(e)
+           e.preventDefault();
+       })
     var inputs = document.getElementById(fileName+"_"+householdId);
     console.log(inputs)
     console.log(inputs.files[0])
