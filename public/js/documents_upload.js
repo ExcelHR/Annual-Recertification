@@ -1,4 +1,24 @@
-
+(async()=>{
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params)
+    userId = params.id
+    const resp=await axios.get(`/user/getTenantsDetails/?id=${userId}`)
+    
+    if(resp.data=="Error"){
+        alert("Something Went Wromg Please Login Again")
+        window.location.href="/"
+    }
+    else{
+        tenantsDetails=resp.data
+        console.log(tenantsDetails)
+        tenants=[]
+        tenantsDetails.forEach(tenant=>{
+            tenants.push(`${tenant.firstName} ${tenant.lastName}`)
+        })
+        console.log(tenants)
+    }
+})()
 const form = document.getElementById("myForm");
 
 form.addEventListener("submit", async function (e) {
@@ -13,7 +33,7 @@ form.addEventListener("submit", async function (e) {
            formData.append( inputs[i].name, inputs[i].files[0])
         
     }
-    
+  
     // // // Make a backend API request to login to the system
     try {
         const res = await axios.post(`/user/storeDocuments`,formData,{headers: {

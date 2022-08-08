@@ -21,10 +21,10 @@ const forgotPassword = document.getElementById("forgot-password")
 // Login Validation
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    let email = document.getElementById("email").value.trim();
+    let userName = document.getElementById("userName").value.trim();
     let password = document.getElementById("password").value.trim();
     let p_flag = false
-    console.log(email,password)
+    console.log(userName,password)
     if (password.length < 8) {
         document.getElementById("pwdValidationText").classList.remove("invisible");
         return
@@ -34,11 +34,11 @@ form.addEventListener("submit", async function (e) {
     }
     // Make a backend API request to login to the system
     try {
-        const res = await axios.post("user/login", { email, password })
+        const res = await axios.post("user/login", { userName, password })
         console.log(res.data)
         if (res.data) {
             console.log("Success")
-                window.location.href=`/user/dashboard/?id=${res.data.userId}`
+                window.location.href=`/user/change-password/?id=${res.data.userId}`
         }
     }
     catch (err) {
@@ -48,8 +48,4 @@ form.addEventListener("submit", async function (e) {
     }
 })
 
-// Redirect to forget password page
-forgotPassword.onclick = function (e) {
-    e.preventDefault();
-    window.location.href = "/user/forgot-password?id=${res.data.userId}"
-}
+

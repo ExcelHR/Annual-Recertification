@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const AppError = require("../utils/appError")
 const Household=require('../models/Household')
+const userCredentials=require('../models/userCredentials')
+const HouseholdData=require('../models/HouseholdData')
 
 
 // const router=Router();
@@ -66,21 +68,21 @@ exports.protect = async(req,res,next)=>{
 exports.login= async(req,res,next)=>{
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     console.log("backend")
-    const {email,password} =req.body
+    const {userName,password} =req.body
     console.log(req.body)
-    let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
 
-    let user = await User.findOne({email})
-    
+    let user = await userCredentials.findOne({userId:userName})
+    console.log(user)
     if (!user ){
             console.log("No user found")
             return next(new AppError("No user with this username exists.",400))
     }
-    let match = await bcrypt.compare(password,user.password)
-    if(!match){
+    console.log(user.Password)
+    let match = await bcrypt.compare(password,user.Password)
+    if(user.Password!=password){
         return next(new AppError("Password incorrect. Please enter the correct password",400))
     }
-    res.send({userId:user._id})
+    res.send(user)
 };
 
 
@@ -119,14 +121,35 @@ exports.postLogin= async (req,res,next)=>{
 };
 
 // Render the forgot password page on the frontend
-exports.forgotPassword = async (req,res,next)=>{
-    res.render("forgot_password")
-}
+
 // Render the change password page on the frontend
 exports.changePassword=async(req,res,next)=>{
     res.render("change_password")
 }
+exports.validateOldpassword=async(req,res,next)=>{
+    const {userId,password,newPassword}=req.body
+    console.log(userId,password,newPassword)
+    
+    const userDetails= await userCredentials.findOne({userId})
+    console.log(userDetails)
+    if (password==userDetails.Password ){
+        resp=await userCredentials.updateOne(
+            {userId}, 
+            {$set: {'Password':newPassword}})
+            console.log(resp)
+            const userDetails= await userCredentials.findOne({userId})
+    console.log(userDetails)
+    
+            if(resp.nModified){
+                
+                res.send({code:userDetails.Code,unitNo:userDetails.UnitNo,householdName:`${userDetails.firstName} ${userDetails.lastName }`})
+            }
+    }
+    else{
+        res.send("Error")
+    }
 
+}
 // Function: Sets up a new password for a user
 exports.postForgotPassword = async(req,res,next)=>{
     // Get the email ID and new password from request body
@@ -216,6 +239,18 @@ exports.reuploadDocuments =async(req,res,next)=>{
 //    console.log(docInfo)
 //    const oldDoc=household.
 
+}
+exports.getTenantsDetails =async(req,res,next)=>{
+    console.log("getTenantsDetails")
+    const tenantsDetails=await HouseholdData.find({userId:req.query.id})
+    console.log(req.query.id)
+    console.log(tenantsDetails)
+    if (tenantsDetails){
+        res.send(tenantsDetails)
+    }
+    else{
+        res.send("Error")
+    }
 }
 exports.saveDetails =async(req,res,next)=>{
     

@@ -65,42 +65,58 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-center"><h2>Unit Details</h2></div>
+                    <div  class="card-header d-flex justify-content-center bg-secondary"><h2  id="HouseholdName"></h2></div>
                     <br>
-                    <div class="card mx-auto " style="width: 18rem;margin-bottom: 3rem;">
+                    <div class="card-body d-flex justify-content-start">
+
+                    <div class="card  text-white bg-info mx-5 " style="width: 18rem;margin-bottom: 3rem;">
                         <div class="card-header">
-                          <p id="name" class="card-text d-flex justify-content-center ">VERMONT CITY LIGHTS II</p>
+                          <p  class="card-text d-flex justify-content-center ">Unit Details</p>
+                          
                           </div>
-                        <img class="card-img-top" src="https://images1.loopnet.com/i2/rg7ixHhoSnT-FPIgrhMUEpL4IfyeIdqzvweXQslLSI0/106/multifamily-property-for-sale-8819-reading-ave-los-angeles-ca-90045.jpg" alt="Card image cap">
                         <div class="card-body">
-                          <p id="address1" class="card-text d-flex justify-content-center">500 UNION DR. Unit 357</p>
-                          <p id="address2"class="card-text d-flex justify-content-center">LOS ANGELES 90017 CA</p>
+                          <p id="name" class="card-text  "></p>
+                          <p id="unitNo" class="card-text  "></p>
+                          <p id="address1" class="card-text "> </p>
+                          <p id="address2"class="card-text "></p>
                         </div>
+             
                       </div>
+                     
+                       
+                        <div class="card  border-warning mx-4 " style="width: 30rem;margin-bottom: 3rem;">
+                          <div class="card-header"><p>Important Dates and Notices</p>
+                          </div>
+                          <div class="card-body">
+              <div class="alert alert-danger" role="alert">
+                 You have received the second AR notice
+                </div><div class="alert alert-danger" role="alert">
+                  You have received the first AR notice
+                </div>             
+                <div class="alert alert-warning" role="alert">
+                  The deadline for uploading documents is 08/01/2022
+                </div> 
+                  </div>
+                </div>
+                
+              
+                
+                  </div>
+                  <form id="myForm"  method="POST" >
+                  
+      
+                    <p class="text-dark d-flex justify-content-center">Click on the upload button below to upload the documents</p>
+                    <div class="col-md-10 offset-md-5">
 
-                    <div class="alert alert-danger" role="alert">
-                       You have received the second AR notice
-                      </div><div class="alert alert-danger" role="alert">
-                        You have received the first AR notice
-                      </div>             
-                      <div class="alert alert-warning" role="alert">
-                        The deadline for uploading documents is 08/01/2022
-                      </div> 
-                    <div class="card-body">
-                        <form id="myForm"  method="POST" >
-                           
-                                
-
-                            <p class="text-dark d-flex justify-content-center">Click on the upload button below to upload the documents</p>
-                            <div class="col-md-10 offset-md-5">
-
-                                <button id="submitBtn" type="submit" class="btn btn-primary">
-                                    Upload
-                                </button>
-                                
-                            </div>
+                        <button id="submitBtn" type="submit" class="btn btn-primary">
+                            Upload
+                        </button>
+                        
                     </div>
-                    </form>
+                  </form>
+              </div>
+              </div>
+            
                 </div>
             </div>
         </div>

@@ -59,17 +59,17 @@
                            
                                 
                             <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Username</label>
                                 <div class="col-md-6">
-                                    <input type="email" id="email" class="form-control" name="email-address" required  />
+                                    <input type="text" id="userName" class="form-control" name="email-address" required  />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required />
-                                    <!-- oninput="passwordValidation(event)"/> -->
+                                    <input type="password" id="password" class="form-control" name="password" required 
+                                    oninput="passwordValidation(event)"/>
                                 </div>
                              
                             </div>
@@ -83,7 +83,7 @@
                                 <button id="submitBtn" type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <a id ="forgot-password" href="http://localhost:8000/user/forgot-password" class="btn btn-link">
+                                <!-- <a id ="forgot-password" href="http://localhost:8000/user/forgot-password" class="btn btn-link"> -->
                                     Forgot Your Password?
                                 </a>
                             </div>

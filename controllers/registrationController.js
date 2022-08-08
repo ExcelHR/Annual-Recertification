@@ -33,16 +33,18 @@ exports.showRegistrationPage = async (req, res, next) => {
 
 // Fetch all properties from Database and send array if Zip codes as response
 exports.getProperty = async (req, res, next) => {
+    console.log(req.query.code)
     let property
-    try{  property = await Property.find()}
-   catch(e){
-    console.log(e)
-   }
-    console.log(property)
-    let states = []
-    property.forEach(x => states.push(x.State))
-    let state = new Set(states)
-    res.send([...state].sort())
+    try {
+        property = await Property.find({ Code: req.query.code })
+        console.log(property[0].Property)
+        res.send(property[0])
+    }
+
+    catch (e) {
+        console.log(e)
+    }
+    
 }
 
 // Fetch Propery Names based on ZIP Code Selected

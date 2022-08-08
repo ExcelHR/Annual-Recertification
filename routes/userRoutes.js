@@ -18,11 +18,13 @@ app.route("/createAdmin")
     .post(userController.postCreateAdmin)
 
 // Handler for - "/forgot-password"
-app.route("/forgot-password")
-.get(userController.forgotPassword)
 
 app.route("/change-password")
 .get(userController.changePassword)
+
+app.route("/validateOldpassword")
+.post(userController.validateOldpassword)
+
 
 app.route("/dashboard")
 .get(userController.user_dashboard)
@@ -30,6 +32,8 @@ app.route("/dashboard")
 app.route("/upload_documents")
 .get(userController.upload_documents)
 
+app.route("/getTenantsDetails")
+.get(userController.getTenantsDetails)
 
 //Create Storage Engine
 const mongodb_uri=process.env.DATABASE_LOCAL
