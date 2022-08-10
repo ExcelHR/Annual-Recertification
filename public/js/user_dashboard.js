@@ -14,6 +14,7 @@
     document.getElementById('address1').innerHTML=res.data.Address
     document.getElementById('address2').innerHTML=`${res.data.City}  ${res.data.Zip}  ${res.data.State}`
     document.getElementById('HouseholdName').innerHTML="Welcome"+" "+ householdName+"!!"
+    await axios.post(`/user/addProperty`,{id:userId,Property:res.data.Property})
  
 
 })()
@@ -23,7 +24,7 @@ const form = document.getElementById("myForm");
 
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    window.location.href = `/user/upload_documents?id=${userId}`
+    window.location.href = `/user/upload_documents/?id=${userId}`
 
 })
 

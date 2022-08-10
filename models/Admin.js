@@ -20,7 +20,7 @@ const AdminSchema = new Schema({
         enum:["MasterAdmin","Admin"]
     },
     units:[
-        {type:Number}
+        {type:String}
     ]
 })
 

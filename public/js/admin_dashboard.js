@@ -42,10 +42,7 @@ const displayTable = (data) => {
     th.appendChild(document.createTextNode('Unit'))
     tr.appendChild(th)
 
-    var th = document.createElement("th");
-    th.setAttribute("scope", "col")
-    th.appendChild(document.createTextNode('Date of birth'))
-    tr.appendChild(th)
+  
 
 
     thead.appendChild(tr)
@@ -77,10 +74,7 @@ const displayTable = (data) => {
         td.setAttribute("class", "align-middle")
         tr.appendChild(td)
 
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(data[i].dob))
-        td.setAttribute("class", "align-middle")
-        tr.appendChild(td)
+      
         tbody.append(tr)
 
     }

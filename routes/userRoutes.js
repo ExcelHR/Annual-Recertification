@@ -35,6 +35,10 @@ app.route("/upload_documents")
 app.route("/getTenantsDetails")
 .get(userController.getTenantsDetails)
 
+app.route("/addProperty")
+.post(userController.addProperty)
+
+
 //Create Storage Engine
 const mongodb_uri=process.env.DATABASE_LOCAL
 const storage = new GridFsStorage({

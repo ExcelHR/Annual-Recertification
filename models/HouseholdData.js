@@ -39,6 +39,14 @@ const HouseholdDataSchema = new Schema({
         type: Number,
         required: true
     },
+    documents: [
+        {
+            fileName: String,
+            originalName: String,
+            comment: String,
+            verificationStatus: String,
+            uploaded:Boolean
+        }],
     Sr_No: {
         type: Number,
         required: true,
@@ -50,6 +58,10 @@ const HouseholdDataSchema = new Schema({
         required: true
     },
     CertificationDate: {
+        type: String,
+        required: true
+    },
+    Property: {
         type: String,
         required: true
     },

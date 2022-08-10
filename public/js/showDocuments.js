@@ -5,7 +5,8 @@
     console.log(resp)
     if (!resp.data.error) {
         console.log(resp.data)
-        const name=`${resp.data.name.firstName}  ${resp.data.name.middleName}  ${resp.data.name.lastName}`
+        const name=resp.data.name   
+        console.log(name)
         document.getElementById('HouseholdName').innerHTML=name
         displayTable(resp.data.documents,userId)
     }

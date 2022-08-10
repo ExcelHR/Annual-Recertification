@@ -252,14 +252,26 @@ exports.getTenantsDetails =async(req,res,next)=>{
         res.send("Error")
     }
 }
+exports.addProperty =async(req,res,next)=>{
+    console.log("addProperty")
+    console.log(req.body)
+    userId=req .body.id
+    property=req.body.Property
+    resp=await HouseholdData.updateMany  (
+        {userId}, 
+        {$set: {'Property':property}})
+    console.log(resp)
+}
 exports.saveDetails =async(req,res,next)=>{
     
     console.log("Save Details")
-    userData=req.body
-    console.log(JSON.stringify(userData))
-    let household=new Household(userData)
-    resp=await household.save()
-    console.log(resp)
+    console.log(req.body)
+    tenantId=req.body.tenantId
+    documents=req.body.documents
+    resp=await HouseholdData.updateOne(
+        {_id:tenantId}, 
+        {$set: {'documents':documents}})
+        console.log(resp)
         if (resp){
             console.log("Data Saved")
             res.send(resp)

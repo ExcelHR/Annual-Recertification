@@ -7,6 +7,7 @@ const  Grid  = require("gridfs-stream")
 const Admin = require("../models/Admin")
 const moment = require("moment-timezone")
 const mongoose = require("mongoose")
+const HouseholdData = require("../models/HouseholdData")
 
 exports.login = async (req, res, next) => {
     res.render('admin_login')
@@ -59,16 +60,17 @@ exports.getHouseholdInfo = async (req, res, next) => {
     adminId=req.query.id
     console.log(adminId)
     const admin=await Admin.find({_id:adminId})
+    console.log(admin)
     const units=admin[0].units
     const household_details=[]
     try{
           for(let i=0;i<units.length;i++) { 
-          const household=await Household.find({unit:units[i]})
+          const household=await HouseholdData.find({UnitNo:units[i]})
           console.log(household)
           for(let j=0;j<household.length;j++) { 
             console.log(household[j])
-            let property=household[j].property
-          household_details.push({houshold_id:household[j]._id,name:`${household[j].name.firstName} ${household[j].name.middleName} ${household[j].name.lastName} `,dob:household[j].dob.toISOString().substring(0, 10),property,unit:units[i],documents:household[j].documents})
+            let property=household[j].Property
+          household_details.push({houshold_id:household[j]._id,name:`${household[j].firstName} ${household[j].lastName} `,property,unit:units[i],documents:household[j].documents})
           }
         }
           console.log(household_details)
@@ -85,11 +87,12 @@ exports.getDocuments = async (req, res, next) => {
     console.log("getDocuments")
     userId=req.query.id
     console.log(userId)
-    const household=await Household.find({_id:userId})
+    const household=await HouseholdData.find({_id:userId})
     console.log(household)
     docs=household[0].documents
     console.log(JSON.stringify(docs))
-    const name=household[0].name
+    const name=household[0].firstName+" "+household[0].lastName
+
    documents=[]
     try{
           
