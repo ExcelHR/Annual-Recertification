@@ -65,6 +65,14 @@ const HouseholdDataSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+    },
     RecertificationDate: {
         type: String,
         required: true

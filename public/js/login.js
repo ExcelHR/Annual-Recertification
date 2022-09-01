@@ -36,9 +36,13 @@ form.addEventListener("submit", async function (e) {
     try {
         const res = await axios.post("user/login", { userName, password })
         console.log(res.data)
-        if (res.data) {
+        if (!res.data.changePwd ) {
             console.log("Success")
                 window.location.href=`/user/change-password/?id=${res.data.userId}`
+        }
+        else{
+        window.location.href=`/user/dashboard/?id=${userName}&code=${res.data.Code}&unitNo=${res.data.UnitNo}&name=${res.data.firstName} ${res.data.lastName}`
+
         }
     }
     catch (err) {

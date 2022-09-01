@@ -123,21 +123,62 @@ exports.postLogin= async (req,res,next)=>{
 // Render the forgot password page on the frontend
 
 // Render the change password page on the frontend
+exports.forgotPassword=async(req,res,next)=>{
+    res.render("forgot_password")
+}
+
 exports.changePassword=async(req,res,next)=>{
     res.render("change_password")
 }
+
+exports.validateEmail=async(req,res,next)=>{
+    console.log("validateEmail")
+    const email=req.query.email
+    console.log(email)
+    resp=await HouseholdData.findOne({email})
+    console.log(resp)
+    if(resp){
+        console.log(resp)
+        res.send({status:"Success",userId:resp.userId})
+    }
+    else{
+        res.send("Failure")
+    }
+
+    
+}
+
+exports.updatePassword=async(req,res,next)=>{
+    console.log("updatePassword")
+    console.log(req.body)
+    const {userId,password}=req.body
+    console.log(password)
+    resp2=await userCredentials.updateOne(
+        {userId}, 
+        {$set: {'Password':password}})
+        console.log(resp2)
+        if(resp2.ok!=0){
+            res.send("Success")
+        }
+}
 exports.validateOldpassword=async(req,res,next)=>{
+    console.log("validateOldpassword")
     const {userId,password,newPassword}=req.body
     console.log(userId,password,newPassword)
     
     const userDetails= await userCredentials.findOne({userId})
-    console.log(userDetails)
+    console.log(userDetails.Password)
     if (password==userDetails.Password ){
         resp=await userCredentials.updateOne(
             {userId}, 
             {$set: {'Password':newPassword}})
             console.log(resp)
             const userDetails= await userCredentials.findOne({userId})
+            resp2=await userCredentials.updateOne  (
+                {userId}, 
+                {$set: {'changePwd':true}})
+                console.log("resp2")
+                console.log(resp2)
     console.log(userDetails)
     
             if(resp.nModified){
@@ -148,6 +189,30 @@ exports.validateOldpassword=async(req,res,next)=>{
     else{
         res.send("Error")
     }
+
+}
+
+exports.saveContactDetails=async(req,res,next)=>{
+    console.log("saveContactDetails")
+    const {userId,email,phoneNumber}=req.body
+    console.log(userId,email,phoneNumber)
+    
+    resp=await HouseholdData.updateMany  (
+        {userId}, 
+        {$set: {'email':email,"phoneNumber":phoneNumber}})        
+       console.log(resp)
+            resp2=await userCredentials.updateMany  (
+                {userId}, 
+                {$set: {'contactDetails':true}})
+                console.log("resp2")
+                console.log(resp2)
+    
+            if(resp2.ok){
+                
+                res.send("Saved")
+            }
+    
+ 
 
 }
 // Function: Sets up a new password for a user
@@ -189,24 +254,30 @@ exports.user_dashboard = async(req,res,next)=>{
     res.render('user_dashboard')
 }
 
+exports.contact_details = async(req,res,next)=>{
+    res.render('contact_details')
+}
+
 exports.upload_documents = async(req,res,next)=>{
     res.render('documents_upload')
 }
 
 exports.storeDocuments =async(req,res,next)=>{
-    console.log(req.body)
+    console.log("storeDocuments")
     console.log(req.files)
     res.send({file:req.files})
 }
 
 exports.updateDocumentsData =async(req,res,next)=>{
+    console.log("updateDocumentsData")
     console.log(req.body)
     _id=req.query.id
     document=req.body
     console.log(_id)
-    const household=await Household.find({_id})
+    const household=await HouseholdData.find({_id})
         console.log(household)
         const docInd=document.originalName.slice(-1)-1
+        console.log(docInd)
         const oldDoc=household[0].documents
         console.log(oldDoc)
         const updatedDoc=[]
@@ -219,7 +290,8 @@ exports.updateDocumentsData =async(req,res,next)=>{
                 }
                
         })
-        resp=await Household.updateOne(
+        console.log(updatedDoc)
+        resp=await HouseholdData.updateOne(
             {_id}, 
             {$set: {'documents':updatedDoc}})
             console.log(resp)
@@ -261,16 +333,43 @@ exports.addProperty =async(req,res,next)=>{
         {userId}, 
         {$set: {'Property':property}})
     console.log(resp)
+    res.send(resp)
 }
 exports.saveDetails =async(req,res,next)=>{
     
     console.log("Save Details")
     console.log(req.body)
     tenantId=req.body.tenantId
-    documents=req.body.documents
+    document=req.body.document
+    updatedDoc=[]
+    tenant=await HouseholdData.findOne({_id:tenantId})
+    console.log(tenant)
+    if(tenant.documents.length==0){
+        updatedDoc.push(document)
+        console.log(updatedDoc)
+    }
+    else{
+    oldDoc=tenant.documents
+    let dupDoc=false
+    tenant.documents.forEach(doc=>{
+        if (doc.originalName==document.originalName){
+            dupDoc=true
+        }
+    })
+    console.log(dupDoc)
+    if(!dupDoc){
+    oldDoc.push(document)
+    updatedDoc=oldDoc
+    }
+    else{
+        res.send("Document Already uploaded")
+        return
+    }
+    }
+    console.log(updatedDoc)
     resp=await HouseholdData.updateOne(
         {_id:tenantId}, 
-        {$set: {'documents':documents}})
+        {$set: {'documents':updatedDoc}})
         console.log(resp)
         if (resp){
             console.log("Data Saved")
@@ -280,7 +379,6 @@ exports.saveDetails =async(req,res,next)=>{
             res.send({error:"Unsuccessful"})
         }
     
-    res.send()
 }
 
 exports.updateVerificationStatus =async(req,res,next)=>{
@@ -289,19 +387,26 @@ exports.updateVerificationStatus =async(req,res,next)=>{
     docInfo=req.body
     console.log(JSON.stringify(docInfo))
     try{
-    resp=await Household.find({_id:docInfo.userId})
+    resp=await HouseholdData.find({_id:docInfo.userId})
+    console.log(resp)
     const documents=resp[0].documents
-    docInd=docInfo.originalName.slice(-1)
+    let ind;
+    documents.forEach(doc=>{
+        if(doc.originalName==docInfo.originalName){
+            ind=documents.indexOf(doc)
+        }
+    })
+    console.log(ind)
     if(docInfo.verificationStatus=="Rejected"){
-        documents[docInd-1]["verificationStatus"]="Rejected"
-        documents[docInd-1]["comment"]=docInfo.comment
+        documents[ind]["verificationStatus"]="Rejected"
+        documents[ind]["comment"]=docInfo.comment
     }
     if(docInfo.verificationStatus=="Approved"){
-        documents[docInd-1]["verificationStatus"]="Approved"
-        documents[docInd-1]["comment"]="This document is good to go !!"
+        documents[ind]["verificationStatus"]="Approved"
+        documents[ind]["comment"]="This document is good to go !!"
     }
     console.log(documents)
-    resp=await Household.updateOne(
+    resp=await HouseholdData.updateOne(
         {_id: docInfo.userId}, 
         {$set: {'documents':documents}})
         console.log(resp)
@@ -321,7 +426,7 @@ exports.updateVerificationStatus =async(req,res,next)=>{
        const userId=req.query.id
        console.log(userId)
        try{
-       docs=await Household.find({userId})
+       docs=await HouseholdData.find({userId})
        console.log(docs)
        res.send(docs)
        }

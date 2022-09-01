@@ -14,7 +14,7 @@
     document.getElementById('address1').innerHTML=res.data.Address
     document.getElementById('address2').innerHTML=`${res.data.City}  ${res.data.Zip}  ${res.data.State}`
     document.getElementById('HouseholdName').innerHTML="Welcome"+" "+ householdName+"!!"
-    await axios.post(`/user/addProperty`,{id:userId,Property:res.data.Property})
+    respData=await axios.post(`/user/addProperty`,{id:userId,Property:res.data.Property})
  
 
 })()
@@ -41,7 +41,7 @@ const getDocuments = async (verifiedstatus) => {
         const householdId = doc._id
         console.log(householdId)
 
-        const name = `${doc.name.firstName} ${doc.name.middleName} ${doc.name.lastName} `
+        const name = `${doc.firstName} ${doc.lastName} `
         doc.documents.forEach(d => {
             if (d.verificationStatus == verifiedstatus)
                 status.push({ originalName: d.originalName, comment: d.comment, verificationStatus: d.verificationStatus })
@@ -67,7 +67,7 @@ const getDocuments = async (verifiedstatus) => {
 
 }
 const displayTable = (data, status, name, householdId) => {
-
+    const DocsName={doc_0:"Most recent Tax Papers",doc_1:"3 months of paystubs",doc_2:"Weekly (13-14 paystubs), Bi-Weekly (7 paystubs)",doc_3:"Semi-monthly (6 paystubs), Monthly (3 paystubs)",doc_4:"TR 113 - Notorized Copy",doc_5:"Most current Award Letter",doc_6:"Most current Award Letter",doc_7:"Most current Award Letter",doc_8:"Most current Award Letter",doc_9:"Most current Award Letter",}
     console.log(data)
     console.log(householdId)
     var table = document.createElement("table");
@@ -127,7 +127,7 @@ const displayTable = (data, status, name, householdId) => {
         tr.appendChild(th)
 
         var td = document.createElement("td");
-        td.appendChild(document.createTextNode(data[i].originalName))
+        td.appendChild(document.createTextNode(DocsName[data[i].originalName]))
         td.setAttribute("class", "align-middle ")
         tr.appendChild(td)
 
@@ -197,6 +197,7 @@ const displayTable = (data, status, name, householdId) => {
 
 const reuploadDocuments = async (fileName, householdId, status, i) => {
     console.log("reuploadDocuments")
+    console.log(householdId)
     form2 = document.getElementById("myForm2");
     console.log(form2)
     form2.addEventListener("submit", function (e) {
@@ -215,7 +216,7 @@ const reuploadDocuments = async (fileName, householdId, status, i) => {
 
     // // // Make a backend API request to login to the system
     try {
-        const res = await axios.post(`/user/reuploadDocuments/?=${householdId}`, formData, {
+        const res = await axios.post(`/user/reuploadDocuments/?id=${householdId}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
@@ -224,13 +225,17 @@ const reuploadDocuments = async (fileName, householdId, status, i) => {
         data = res.data
         let key = Object.keys(data.file)
         const documents = { fileName: data.file[key[0]][0].filename, comment: "Waiting for Validation", verificationStatus: "Pending", originalName: data.file[key[0]][0].fieldname }
+        var numRows = document.getElementById("table"+ "_" + householdId).rows.length
+        console.log(numRows)
         const resp = await axios.post(`/user/updateDocumentsData/?id=${householdId}`, documents)
         console.log(resp.data)
         if (resp.data) {
             alert("Thank you for reuploading the documents!!")
-            document.getElementById("table" + "_" + householdId).deleteRow(parseInt(i) + 1)
-            if (i == 0) {
+            if (numRows==2) {
                 document.getElementById("table" + "_" + householdId).innerHTML = `<h4 class="d-flex justify-content-center">No Rejeced Documents</h4>`
+            }
+            else{
+            document.getElementById("table" + "_" + householdId).deleteRow(parseInt(i) + 1)
             }
         }
 

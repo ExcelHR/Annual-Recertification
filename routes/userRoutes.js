@@ -22,12 +22,22 @@ app.route("/createAdmin")
 app.route("/change-password")
 .get(userController.changePassword)
 
+// app.route("/update-password")
+// .get(userController.updatePassword)
+
 app.route("/validateOldpassword")
 .post(userController.validateOldpassword)
+
+app.route("/saveContactDetails")
+.post(userController.saveContactDetails)
+
 
 
 app.route("/dashboard")
 .get(userController.user_dashboard)
+
+app.route("/contact_details")
+.get(userController.contact_details)
 
 app.route("/upload_documents")
 .get(userController.upload_documents)
@@ -35,8 +45,18 @@ app.route("/upload_documents")
 app.route("/getTenantsDetails")
 .get(userController.getTenantsDetails)
 
+app.route("/forgot-password")
+.get(userController.forgotPassword)
+
 app.route("/addProperty")
 .post(userController.addProperty)
+
+
+app.route("/validateEmail")
+.get(userController.validateEmail)
+
+app.route("/updatePassword")
+.post(userController.updatePassword)
 
 
 //Create Storage Engine
@@ -44,7 +64,7 @@ const mongodb_uri=process.env.DATABASE_LOCAL
 const storage = new GridFsStorage({
     url: mongodb_uri,
     file: (req, file) => {
-       console.log(req.query.id)
+      console.log('asdsafdsfse')
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
           if (err) {
@@ -64,8 +84,8 @@ const storage = new GridFsStorage({
   });
   const upload = multer({ storage,dest:'Documents' });
 const fields=[]
-for (let i=0;i<3;i++){
-    fields.push({name:`Document${i+1}`})
+for (let i=0;i<10;i++){
+    fields.push({name:`doc_${i}`})
 }
   app.route('/storeDocuments')
   .post( upload.fields(fields),userController.storeDocuments)

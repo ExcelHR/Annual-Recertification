@@ -34,13 +34,13 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
             <ul class="navbar-nav ml-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8000/register/SelectProperty">Register</a>
+                    <a class="nav-link" href="http://localhost:8000">Logout</a>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
@@ -50,42 +50,38 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Login</div>
-                                        <div id="validationText" class="text text-danger text-center mt-1 invisible" >
-                                            Invalid Email or password! Try again.
-                                        </div>
+                    <div class="card-header">Contact Details</div>
+                                      
                     <div class="card-body">
-                        <form id="myForm"  method="POST" >
+                        <form id="myForm"  method="POST"  onsubmit="return false">
                            
                                 
                             <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Email Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="userName" class="form-control" name="email-address" required  />
+                                    <input type="email" id="email" class="form-control" name="email-address" required  />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <label for="phone number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required 
-                                    oninput="passwordValidation(event)"/>
+                                    <input type="tel" id="phone" name="phone" class="form-control"
+                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                    required>
+                                    <small>Format: 123-456-7890</small>
+
                                 </div>
                              
                             </div>
-                            <div  id="pwdValidationText" class=" text text-danger text-center mb-2 invisible" >
-                                The password should contain minimum 8 characters.
-                            </div>
+                          
 
                           
 
                             <div class="col-md-6 offset-md-4">
-                                <button id="submitBtn" type="submit" class="btn btn-primary">
+                                <button id="submitBtn" type="submit" class="btn btn-primary" onclick="saveContactDetails()">
                                     Submit
                                 </button>
-                                <a id ="forgot-password" href="http://localhost:8000/user/forgot-password" class="btn btn-link">
-                                    Forgot Your Password?
-                                </a>
                             </div>
                     </div>
                     </form>
@@ -104,7 +100,7 @@
 
 
 </body>
-<script type="text/javascript" src="/js/login.js" ></script>
+<script type="text/javascript" src="/js/contact_details.js" ></script>
 
     <%- include('footer'); -%>
     

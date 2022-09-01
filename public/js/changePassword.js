@@ -46,11 +46,12 @@ const changePassword=async()=>{
         return;
     }
     const body={userId,password:oldPassword,newPassword}
+    console.log(body)
     const resp=await axios.post( '/user/validateOldpassword',body)
     console.log(resp.data)
     if(resp.data!="Error"){
         alert("Password Changed")
-        window.location.href=`/user/dashboard/?id=${userId}&code=${resp.data.code}&unitNo=${resp.data.unitNo}&name=${resp.data.householdName}`
+        window.location.href=`/user/contact_details/?id=${userId}&code=${resp.data.code}&unitNo=${resp.data.unitNo}&name=${resp.data.householdName}`
     }
     else{
         document.getElementById("validationText").classList.remove("invisible");

@@ -85,6 +85,7 @@ exports.getHouseholdInfo = async (req, res, next) => {
 
 exports.getDocuments = async (req, res, next) => {
     console.log("getDocuments")
+ 
     userId=req.query.id
     console.log(userId)
     const household=await HouseholdData.find({_id:userId})

@@ -45,9 +45,14 @@ const userCredentialsSchema = new Schema({
         type: String,
         required: true
     },
-
+    changePwd: {
+        type: Boolean,
+    },
+    contactDetails: {
+        type: Boolean,
+    },
     Code: {
-        type: String,
+        type: Number,
         required: true
     }
   
