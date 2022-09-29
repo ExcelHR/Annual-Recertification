@@ -70,4 +70,9 @@ router.route("/showDocuments")
     .get(adminController.showDocuments)
 router.route("/getDocuments")
     .get(adminController.getDocuments)
+
+    router.route("/getAdminDetails")
+    .get(adminController.getAdminDetails)
+
+    
 module.exports = router

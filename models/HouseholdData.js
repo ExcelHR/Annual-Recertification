@@ -25,11 +25,9 @@ const HouseholdDataSchema = new Schema({
         },
         AdultOrMinor: {
             type: String,
-            required: true
         },
         Relation: {
             type: String,
-            required: true
         },
         Student: {
             type: String,
@@ -63,21 +61,23 @@ const HouseholdDataSchema = new Schema({
     },
     Property: {
         type: String,
-        required: true
     },
     email: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: String,
-        required: true
     },
     RecertificationDate: {
         type: String,
         required: true
     },
-
+    adminEmail: {
+        type: String,
+    },
+    Code: {
+        type: Number,
+    }
     
   
 })

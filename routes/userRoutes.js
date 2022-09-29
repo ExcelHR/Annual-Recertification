@@ -42,6 +42,12 @@ app.route("/contact_details")
 app.route("/upload_documents")
 .get(userController.upload_documents)
 
+app.route("/addNewTenant")
+.get(userController.addNewTenant)
+
+app.route("/saveTenantDetails")
+.post(userController.saveTenantDetails)
+
 app.route("/getTenantsDetails")
 .get(userController.getTenantsDetails)
 
@@ -84,7 +90,7 @@ const storage = new GridFsStorage({
   });
   const upload = multer({ storage,dest:'Documents' });
 const fields=[]
-for (let i=0;i<10;i++){
+for (let i=0;i<60;i++){
     fields.push({name:`doc_${i}`})
 }
   app.route('/storeDocuments')

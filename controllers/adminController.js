@@ -8,7 +8,7 @@ const Admin = require("../models/Admin")
 const moment = require("moment-timezone")
 const mongoose = require("mongoose")
 const HouseholdData = require("../models/HouseholdData")
-
+const code_prop={445: "THE CREST APARTMENTS",455: "PALM TERRACE",3950: "VERMONT CITY LIGHTS II",4000: "VERMONT CITY LIGHTS I",4050: "COURTLAND CITY LIGHTS",4150: "HUNTINGTON HACIENDA 1",4200: "ADAMS CITY LIGHTS",4250: "ANGELS CITY LIGHTS",4300: "BEVERLY CITY LIGHTS",4350: "BROADWAY VISTA",4400: "COCHRAN CITY LIGHTS",4450: "GARLAND CITY LIGHTS",4500: "GATEWAY CITY LIGHTS",4550: "GRANDVIEW CITY LIGHTS",4600: "HAPPY VALLEY CITY LIGHTS",4650: "MELROSE APARTMENTS",4700: "WESTLAKE CITY LIGHTS",4750: "WILSHIRE CITY LIGHTS",4800: "WITMER CITY LIGHTS",4850: "MISSION CITY LIGHTS",4900: "RAINTREE",4950: "SAGEWOOD",5000: "ATRIUM COURT",5050: "SPRINGBROOK GROVE",5100: "GENEVA VILLAGE",5150: "TANAGER SPRINGS I",5200: "TANAGER SPRINGS II",5250: "ALAMEDA TERRACE",5300: "FIGUEROA PLACE",5350: "HARVARD CIRCLE",5400: "MAIN STREET VISTAS",5450: "MENLO PARK",5500: "THE MEDITERRANEAN",5550: "VALLEY VIEW",5600: "CORTEZ CITY LIGHTS",5650: "RUNNYMEDE SPRINGS",5700: "STUDIO POINTE (WILTON)",5750: "SONOMA APT",5800: "YALE TERRACE"}
 exports.login = async (req, res, next) => {
     res.render('admin_login')
 }
@@ -21,7 +21,9 @@ exports.loginValidation = async (req, res, next) => {
     const { email, password } = req.body
     console.log(req.body)
     let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
+    console.log(hashedPassword)
     let admin = await Admin.findOne({ email })
+    console.log(admin)
     if (!admin) {
         console.log("No admin found")
         return next(new AppError("No admin with this adminname exists.", 400))
@@ -42,6 +44,11 @@ async function unlinkUploadedFiles({ files = {} }) {
 exports.getDashboard = async (req, res, next) => {
     res.render("dashboard")
 };
+exports.getAdminDetails = async (req, res, next) => {
+    adminId=req.query.id
+    resp=await Admin.find({_id:adminId})
+    res.send(resp[0].units)
+};
 
 // Render add property page
 exports.getAddProperty = async (req, res, next) => {
@@ -57,23 +64,24 @@ exports.showDocuments = async (req, res, next) => {
 
 exports.getHouseholdInfo = async (req, res, next) => {
     console.log("getHouseholdInfo")
-    adminId=req.query.id
-    console.log(adminId)
-    const admin=await Admin.find({_id:adminId})
-    console.log(admin)
-    const units=admin[0].units
+    unitNo=req.query.unitNo
+    adminId=req.query.adminId
+    admin=await Admin.find({_id:adminId})
+   
+    
     const household_details=[]
     try{
-          for(let i=0;i<units.length;i++) { 
-          const household=await HouseholdData.find({UnitNo:units[i]})
-          console.log(household)
+        const household=await HouseholdData.find({UnitNo:unitNo})
+        console.log(household)
           for(let j=0;j<household.length;j++) { 
             console.log(household[j])
-            let property=household[j].Property
-          household_details.push({houshold_id:household[j]._id,name:`${household[j].firstName} ${household[j].lastName} `,property,unit:units[i],documents:household[j].documents})
+          household_details.push({houshold_id:household[j]._id,property:code_prop[household[j].Code],name:`${household[j].firstName} ${household[j].lastName} `,unit:household[j],documents:household[j].documents})
+          resp=await HouseholdData.updateOne(
+            {_id:household[j]._id}, 
+            {$set: {'adminEmail':admin[0].email}})
           }
-        }
-          console.log(household_details)
+          console.log(resp)
+        
           res.send(household_details)
     }
     catch(e){
