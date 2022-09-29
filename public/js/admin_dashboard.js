@@ -1,3 +1,4 @@
+
 var  adminId
 (async () => {
     console.log("admin_Dashboard")
@@ -5,13 +6,32 @@ var  adminId
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params)
      adminId = params.id
+     const code_prop={445: "THE CREST APARTMENTS",455: "PALM TERRACE",3950: "VERMONT CITY LIGHTS II",4000: "VERMONT CITY LIGHTS I",4050: "COURTLAND CITY LIGHTS",4150: "HUNTINGTON HACIENDA 1",4200: "ADAMS CITY LIGHTS",4250: "ANGELS CITY LIGHTS",4300: "BEVERLY CITY LIGHTS",4350: "BROADWAY VISTA",4400: "COCHRAN CITY LIGHTS",4450: "GARLAND CITY LIGHTS",4500: "GATEWAY CITY LIGHTS",4550: "GRANDVIEW CITY LIGHTS",4600: "HAPPY VALLEY CITY LIGHTS",4650: "MELROSE APARTMENTS",4700: "WESTLAKE CITY LIGHTS",4750: "WILSHIRE CITY LIGHTS",4800: "WITMER CITY LIGHTS",4850: "MISSION CITY LIGHTS",4900: "RAINTREE",4950: "SAGEWOOD",5000: "ATRIUM COURT",5050: "SPRINGBROOK GROVE",5100: "GENEVA VILLAGE",5150: "TANAGER SPRINGS I",5200: "TANAGER SPRINGS II",5250: "ALAMEDA TERRACE",5300: "FIGUEROA PLACE",5350: "HARVARD CIRCLE",5400: "MAIN STREET VISTAS",5450: "MENLO PARK",5500: "THE MEDITERRANEAN",5550: "VALLEY VIEW",5600: "CORTEZ CITY LIGHTS",5650: "RUNNYMEDE SPRINGS",5700: "STUDIO POINTE (WILTON)",5750: "SONOMA APT",5800: "YALE TERRACE"}
 
      const resp = await axios.get(`/admin/getAdminDetails/?id=${adminId}`)
-     units=resp.data
-     console.log(units)
+     console.log(resp)
+     property=resp.data.property
+     console.log(property)
+     for(k=0;k<property.length;k++){
+        const prop=`<div class="accordion" id="accordionExample1">
+        <div class="card">
+        <div class="card-header d-flex justify-content-center">
+          <h2 class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#${property[k].code}" aria-expanded="false" aria-controls="collapseOne"> ${code_prop[property[k].code]}</h2>
+        </div>
+        <div id="${property[k].code}" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordionExample1">
+            <div class="row">
+            <div class="container col-12" id="cBody_${property[k].code}">
+            <div class="row">
+            </div>
+            </div>
+            </div>
+            </div>`
+         document.getElementById('card').insertAdjacentHTML('beforeend',prop)
+
+            units=property[k].units
      for(j=0;j<units.length;j++){
      console.log(units[j])
-     res = await axios.get(`/admin/getHouseholdInfo/?unitNo=${units[j]}&adminId=${adminId}`)
+     res = await axios.get(`/admin/getHouseholdInfo/?unitNo=${units[j]}&adminId=${adminId}&code=${property[k].code}`)
      console.log(res)
         data=res.data
         console.log(data)
@@ -29,6 +49,7 @@ var  adminId
              </div>
              </div>
              `
+
              var table = document.createElement("table");
              table.setAttribute("class", " table table-hover pointer  ");
              table.setAttribute("id", " table");  
@@ -88,11 +109,11 @@ var  adminId
              tbody.append(tr)
              }
              table.append(tbody)
-         document.getElementById('card').insertAdjacentHTML('beforeend',unitNo)
+         document.getElementById(property[k].code).insertAdjacentHTML('beforeend',unitNo)
          document.getElementById(units[j]).appendChild(table)
  
      }
-    
+     }
 
 })()
    

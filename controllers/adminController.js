@@ -41,7 +41,8 @@ exports.loginValidation = async (req, res, next) => {
 exports.getAdminDetails = async (req, res, next) => {
     adminId=req.query.id
     resp=await Admin.find({_id:adminId})
-    res.send(resp[0].units)
+    console.log(resp)
+    res.send(resp[0])
 };
 
 // Render add property page
@@ -61,11 +62,13 @@ exports.getHouseholdInfo = async (req, res, next) => {
     unitNo=req.query.unitNo
     adminId=req.query.adminId
     admin=await Admin.find({_id:adminId})
-   
-    
+   code=req.query.code
+    console.log(unitNo,code)
     const household_details=[]
     try{
-        const household=await HouseholdData.find({UnitNo:unitNo})
+        const household=await HouseholdData.find({UnitNo:unitNo,Code:code})
+        
+        console.log('household')
         console.log(household)
           for(let j=0;j<household.length;j++) { 
             console.log(household[j])
