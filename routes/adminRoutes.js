@@ -14,25 +14,16 @@ router.route("/dashboard")
     .get(adminController.admin_dashboard)
 
 // Renders all customers page
-router.get("/showAllCustomers", (req, res) => {
-    res.render('customers.ejs')
-})
 
 // Renders specific customer's page
-router.get("/showCustomer/:customerId", (req, res) => {
-    res.render("customer", { customerId: req.params.customerId })
-})
+
 
 // router.get("/editCustomer/:customerId",(req,res)=>{
 //     res.render("edit-customer",{customerId:req.params.customerId})
 // })
 
-// Handler for - "/editcustomer/{specific customer ID(number)}"
-router.get("/editCustomer/:customerId", adminController.getShowEditCustomerPage)
 
 // Handler for - "/dashboard"
-router.route("/dashboard")
-    .get(adminController.getDashboard)
 
 // // Handler for - "/addProperty"
 // router.route("/addProperty")

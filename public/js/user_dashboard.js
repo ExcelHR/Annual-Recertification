@@ -7,7 +7,7 @@
     unitNo=params.unitNo
     householdName=params.name
     console.log(userId, code,unitNo)
-    res = await axios.get(`/register/getProperty/?code=${code}`)
+    res = await axios.get(`/user/getProperty/?code=${code}`)
     console.log(res.data)
     document.getElementById('name').innerHTML=res.data.Property
     document.getElementById('unitNo').innerHTML="Unit No"+" "+ unitNo

@@ -18,11 +18,8 @@ const userRoutes = require("./routes/userRoutes")
 // Admin user routes(logic)
 const adminRoutes = require("./routes/adminRoutes")
 // Customer routes(logic)
-const customerRoutes = require("./routes/customerRoutes")
 // Application routes(logic)
-const registrationRoutes = require("./routes/registrationRoutes")
 // Global error routes(logic)
-const globalErrorController = require("./controllers/errorController")
 const  Grid  = require("gridfs-stream")
 
 
@@ -89,10 +86,7 @@ app.get("/",function(req,res,next){
 // Routing to appropriate routers(logic)
 app.use("/user",userRoutes)
 app.use("/admin",adminRoutes)
-app.use("/customer",customerRoutes)
-app.use("/register",registrationRoutes)
-app.use(globalErrorController.error)
-app.use(globalErrorController.pageNotFound)
+
 // App listens on a given port
 app.listen(port)
 // exports.gfs={gfs}

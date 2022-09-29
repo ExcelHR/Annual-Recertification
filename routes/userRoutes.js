@@ -14,13 +14,14 @@ app.route("/login")
     .post(userController.login)
 
 // Handler for - "/createAdmin"
-app.route("/createAdmin")
-    .post(userController.postCreateAdmin)
 
 // Handler for - "/forgot-password"
 
 app.route("/change-password")
 .get(userController.changePassword)
+
+app.route("/getProperty")
+    .get(userController.getProperty)
 
 // app.route("/update-password")
 // .get(userController.updatePassword)
@@ -70,7 +71,6 @@ const mongodb_uri=process.env.DATABASE_LOCAL
 const storage = new GridFsStorage({
     url: mongodb_uri,
     file: (req, file) => {
-      console.log('asdsafdsfse')
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
           if (err) {

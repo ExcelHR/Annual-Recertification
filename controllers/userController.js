@@ -8,6 +8,7 @@ const AppError = require("../utils/appError")
 const Household=require('../models/Household')
 const userCredentials=require('../models/userCredentials')
 const HouseholdData=require('../models/HouseholdData')
+const Property=require('../models/Property')
 
 var nodeoutlook = require('nodejs-nodemailer-outlook')// const router=Router();
 
@@ -15,54 +16,15 @@ const DocsName={doc_0:"Most recent Tax Papers",doc_1:"Weekly paystub 1",doc_2:"W
 
 
 // Create a JWT token
-const signToken = id =>{
-    return jwt.sign({id},process.env.JWT_SECRET_KEY,{
-        expiresIn: process.env.JWT_EXPIRES_IN
-    })
-}
 
 
 // Utility function to validate a JWT token
-const verifyToken = async token => {
-    return (jwt.verify)(token,process.env.JWT_SECRET_KEY)
-}
 
 // Function: Protection controller: To restrict controller to specific routes and not allow
 // administration logic. Allows authorized access to administrators of the system.
-exports.restrictTo = ({role})=>{
-    return (async(req,res,next)=>{
-        if(role=="admin"){
-            next()
-        }
-        return new AppError("Unauthorized access. Access restricted to administration only.",400)
-
-    })
-}
 
 
 // Function: Checks if the request comes form a valid authenticated user.
-exports.protect = async(req,res,next)=>{
-    const {authorization} = req.headers
-    // Get the JWT token
-    let token;
-    if(authorization && authorization.startsWith("Bearer")){
-        token = authorization.split(' ')[1]
-    }
-    // If no JWT token, redirect the user to login again
-    if(!token){
-        return new AppError("Use not logged in. Please login and retry.",400)
-    }
-    
-    const decoded = await verifyToken(token)
-    // Find the user based on JWT token if no user found, throw error
-    const user = await User.findById(decoded.id)
-   
-
-    if(!user){
-        return new AppError("No user found. Please login and retry.",400)
-    }
-    next()
-}
 
 // Renders login page
 exports.login= async(req,res,next)=>{
@@ -86,39 +48,6 @@ exports.login= async(req,res,next)=>{
 };
 
 
-// Validates login information, assigns a JWT token if successfull and redirects to customer homepage.
-exports.postLogin= async (req,res,next)=>{
-    // Take email and password from the request body (frontend)
-    const {email,password} =req.body
-    // Check if either email or password does not exist, if not throw an error
-  
-    // Check if the user exists, if not throw an error
-    let user = await User.findOne({email})
-    if (!user){
-        return next(new AppError("No user with this username exists.",400))
-    }
-    // match the passwords using bcrypt if they do not match throw an error
-    let match = await bcrypt.compare(password,user.password)
-    if(!match){
-        return next(new AppError("Password incorrect. Please enter the correct password",400))
-    }
-    // If they match, assign a JWT token to authenticate on future requests
-    const token = signToken(user.id)
-    req.session.email = user.email
-    let role=user.role
-    let matchingId = user.id
-    // See if the user is of type customer, if yes assign it it's collection id
-    if(role=="customer"){
-        const customer = await Customer.findOne({userId:user.id},{id:1})
-        matchingId = customer.id
-    }
-    return res.status(200).json({
-        status:"success",
-        role,
-        token,
-        matchingId
-    })
-};
 
 // Render the forgot password page on the frontend
 
@@ -235,21 +164,7 @@ exports.postForgotPassword = async(req,res,next)=>{
 
 
 // Function: Creates an admin user explicitly
-exports.postCreateAdmin = async(req,res,next)=>{
-    // Take the user-entered email ID and password from the request body
-    const {email,password} = req.body
-    // Hash the password
-    let hashedPassword = await bcrypt.hash(password,parseInt(process.env.BCRYPT_SALT))
-    // Create an admin user
-    await User.create({
-        email,
-        password:hashedPassword,
-        role:"admin"
-    })
-    return res.status(200).json({
-        status:"success"
-    })
-};
+
 exports.user_dashboard = async(req,res,next)=>{
     res.render('user_dashboard')
 }
@@ -265,6 +180,20 @@ exports.contact_details = async(req,res,next)=>{
 
 exports.upload_documents = async(req,res,next)=>{
     res.render('documents_upload')
+}
+exports.getProperty = async (req, res, next) => {
+    console.log(req.query.code)
+    let property
+    try {
+        property = await Property.find({ Code: req.query.code })
+        console.log(property[0].Property)
+        res.send(property[0])
+    }
+
+    catch (e) {
+        console.log(e)
+    }
+    
 }
 
 exports.storeDocuments =async(req,res,next)=>{
