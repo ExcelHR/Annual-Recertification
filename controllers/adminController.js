@@ -1,6 +1,4 @@
 const bcrypt = require("bcryptjs")
-const Household = require("../models/Household")
-const Customer = require("../models/Customer")
 const AppError = require("../utils/appError")
 const { deleteFiles } = require("../utils/fileUtil")
 const  Grid  = require("gridfs-stream")
@@ -9,16 +7,22 @@ const moment = require("moment-timezone")
 const mongoose = require("mongoose")
 const HouseholdData = require("../models/HouseholdData")
 const code_prop={445: "THE CREST APARTMENTS",455: "PALM TERRACE",3950: "VERMONT CITY LIGHTS II",4000: "VERMONT CITY LIGHTS I",4050: "COURTLAND CITY LIGHTS",4150: "HUNTINGTON HACIENDA 1",4200: "ADAMS CITY LIGHTS",4250: "ANGELS CITY LIGHTS",4300: "BEVERLY CITY LIGHTS",4350: "BROADWAY VISTA",4400: "COCHRAN CITY LIGHTS",4450: "GARLAND CITY LIGHTS",4500: "GATEWAY CITY LIGHTS",4550: "GRANDVIEW CITY LIGHTS",4600: "HAPPY VALLEY CITY LIGHTS",4650: "MELROSE APARTMENTS",4700: "WESTLAKE CITY LIGHTS",4750: "WILSHIRE CITY LIGHTS",4800: "WITMER CITY LIGHTS",4850: "MISSION CITY LIGHTS",4900: "RAINTREE",4950: "SAGEWOOD",5000: "ATRIUM COURT",5050: "SPRINGBROOK GROVE",5100: "GENEVA VILLAGE",5150: "TANAGER SPRINGS I",5200: "TANAGER SPRINGS II",5250: "ALAMEDA TERRACE",5300: "FIGUEROA PLACE",5350: "HARVARD CIRCLE",5400: "MAIN STREET VISTAS",5450: "MENLO PARK",5500: "THE MEDITERRANEAN",5550: "VALLEY VIEW",5600: "CORTEZ CITY LIGHTS",5650: "RUNNYMEDE SPRINGS",5700: "STUDIO POINTE (WILTON)",5750: "SONOMA APT",5800: "YALE TERRACE"}
+
+//Renders Admin Login Page
 exports.login = async (req, res, next) => {
     res.render('admin_login')
 }
+//Renders Admin Dashboard after Login
 exports.admin_dashboard = async (req, res, next) => {
     res.render('admin_dashboard')
 }
+
+//Validates Admin Credentials
 exports.loginValidation = async (req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     console.log("backend")
     const { email, password } = req.body
+    console.log(password)
     console.log(req.body)
     let hashedPassword = await bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT))
     console.log(hashedPassword)
@@ -34,10 +38,9 @@ exports.loginValidation = async (req, res, next) => {
     }
     res.send(admin._id)
 };
-// utitlity function for deleting documents.
 
 
-
+// Fetch Admin Details
 exports.getAdminDetails = async (req, res, next) => {
     adminId=req.query.id
     resp=await Admin.find({_id:adminId})
@@ -45,18 +48,15 @@ exports.getAdminDetails = async (req, res, next) => {
     res.send(resp[0])
 };
 
-// Render add property page
-exports.getAddProperty = async (req, res, next) => {
-    console.log("getAddProperty")
-    res.render("newProperty")
-}
 
+// Renders the show Documents page
 exports.showDocuments = async (req, res, next) => {
     console.log("Show Documents")
     console.log(req.query.id)
     res.render('show_Documents')
 }
 
+//Fetch Tenant info from tenant Database
 exports.getHouseholdInfo = async (req, res, next) => {
     console.log("getHouseholdInfo")
     unitNo=req.query.unitNo
@@ -87,7 +87,7 @@ exports.getHouseholdInfo = async (req, res, next) => {
         res.status(400).send({message:"Something went wrong" ,status:404,error:true})
     }
 }
-
+// Fetch documents from household Database for Review
 exports.getDocuments = async (req, res, next) => {
     console.log("getDocuments")
  
@@ -120,7 +120,7 @@ exports.getDocuments = async (req, res, next) => {
 exports.getFile = async (req, res, next) => {
     // Get the customer Id
     console.log('Get File')
-    const mongodb_uri = process.env.DATABASE_LOCAL
+    const mongodb_uri = process.env.DATABASE_CLUSTER
     const conn = mongoose.createConnection(mongodb_uri)
     let gfs
     await conn.once('open', () => {
@@ -139,9 +139,8 @@ exports.getFile = async (req, res, next) => {
     })
     })
     
-    // Fetch the customer based on customer Id
+ 
    
 };
 
-// Function: Sets the document verification state
 

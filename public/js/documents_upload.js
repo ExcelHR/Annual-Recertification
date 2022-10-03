@@ -1,8 +1,11 @@
 (async () => {
+    // Fetch URL Query Params
+
   const urlSearchParams = new URLSearchParams(window.location.search);
   const params = Object.fromEntries(urlSearchParams.entries());
   console.log(params)
   userId = params.id
+  //Get Tenant Details
   const resp = await axios.get(`/user/getTenantsDetails/?id=${userId}`)
 
   if (resp.data == "Error") {
@@ -15,7 +18,7 @@
     console.log(tenantsDetails)
     tenants = []
     const upload_body = document.getElementById('dashboard_card')
-
+//Display Document Upload Table
     tenantsDetails.forEach(tenant => {
       tenants.push({ name: `${tenant.firstName} ${tenant.lastName}`, tenantId: tenant._id })
       const upload = `
@@ -708,7 +711,7 @@
   }
 })()
 
-
+// Function to upload Document to tenant Databse
 const uploadDoc = async (doc, tenantId, checkbox) => {
   console.log("Upload Doc")
   console.log(doc, checkbox, tenantId)
@@ -720,6 +723,7 @@ const uploadDoc = async (doc, tenantId, checkbox) => {
   formData.append(inputs.name, inputs.files[0])
   console.log(formData)
   try {
+    // API call to store Document to DB
     const res = await axios.post(`/user/storeDocuments`, formData, {
       headers: {
         "Content-Type": "multipart/form-data"
@@ -737,6 +741,7 @@ const uploadDoc = async (doc, tenantId, checkbox) => {
       console.log(document)
       body = { document, tenantId }
       console.log(body)
+      //Saves user details to DB
       let resp = await axios.post('/user/saveDetails', body)
       console.log(resp)
       if (resp.data != "Document Already uploaded") {

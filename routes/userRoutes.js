@@ -43,11 +43,7 @@ app.route("/contact_details")
 app.route("/upload_documents")
 .get(userController.upload_documents)
 
-app.route("/addNewTenant")
-.get(userController.addNewTenant)
 
-app.route("/saveTenantDetails")
-.post(userController.saveTenantDetails)
 
 app.route("/getTenantsDetails")
 .get(userController.getTenantsDetails)
@@ -66,8 +62,8 @@ app.route("/updatePassword")
 .post(userController.updatePassword)
 
 
-//Create Storage Engine
-const mongodb_uri=process.env.DATABASE_LOCAL
+//Create Storage Engine for storing documents
+const mongodb_uri=process.env.DATABASE_CLUSTER
 const storage = new GridFsStorage({
     url: mongodb_uri,
     file: (req, file) => {

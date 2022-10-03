@@ -24,7 +24,7 @@ const  Grid  = require("gridfs-stream")
 
 
 
-const mongodb_uri=process.env.DATABASE_LOCAL
+const mongodb_uri=process.env.DATABASE_CLUSTER
 const port=process.env.PORT
 const MongoConn=async(conn)=>{
     let gfs

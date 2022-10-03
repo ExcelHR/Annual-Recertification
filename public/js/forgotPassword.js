@@ -9,6 +9,7 @@ form.addEventListener("submit", async function (e) {
     if(newPassword!=confirmNewPassword){
             alert("Passwords do not match. Please try again")
     }
+    // Validates email
     resp=await axios.get(`/user/validateEmail/?email=${email}`)
     if(resp.data.status=="Success"){
         body={userId:resp.data.userId,password:newPassword}
@@ -31,6 +32,8 @@ form.addEventListener("submit", async function (e) {
     }
 
 })
+
+//Password Validation
 const passwordValidation = (event) => {
     console.log(event.target.value)
     if (event.target.value.length >= 0 && event.target.value.length < 8) {

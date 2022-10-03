@@ -1,4 +1,6 @@
 (async () => {
+    // Fetch URL Query Params
+
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params)
@@ -28,6 +30,7 @@
 
 })()
 const displayTable = async (data,userId) => {
+//Display tenant document details
 const DocsName={doc_0:"Most recent Tax Papers",doc_1:"Weekly paystub 1",doc_2:"Weekly paystub 2",doc_3:"Weekly paystub 3",doc_4:"Weekly paystub 4",doc_5:"Weekly paystub 5",doc_6:"Weekly paystub 6",doc_7:"Weekly paystub 7",doc_8:"Weekly paystub 8",doc_9:"Weekly paystub 9",doc_10:"Weekly paystub 10",doc_11:"Weekly paystub 11",doc_12:"Weekly paystub 12",doc_13:"Weekly paystub 13",doc_14:"Weekly paystub 14",doc_15:"Bi-Weekly paystub 1",doc_16:"Bi-Weekly paystub 2",doc_17:"Bi-Weekly paystub 3",doc_18:"Bi-Weekly paystub 4",doc_19:"Bi-Weekly paystub 5",doc_20:"Bi-Weekly paystub 6",doc_21:"Bi-Weekly paystub 7",doc_22:"Semi Monthly paystub 1",doc_23:"Semi Monthly paystub 2",doc_24:"Semi Monthly paystub 3",doc_25:"Semi Monthly paystub 4",doc_26:"Semi Monthly paystub 5",doc_27:"Semi Monthly paystub 6",doc_28:"Monthly paystub 1",doc_29:"Monthly paystub 2",doc_30:"Monthly paystub 3",doc_31:"TR 113 - Notorized Copy",doc_32:"Most current Award Letter",doc_33:"Most current Award Letter",doc_35:"Most current Award Letter",doc_36:"Most current Award Letter",doc_37:"Most current Award Letter",doc_38:"Most current Award Letter",doc_39:"Court Order for Child Support payments",doc_40:"Parental Agreement for Child Support",doc_41:"Court Order for Alimony or Spousal Support",doc_42:"Court Order for Alimony or Spousal Support",doc_43:"Annual Statement",doc_44:"3 months of rent receipts & Property Tax papers",doc_45:"Financial Aid Award Letter",doc_46:"ATM Balance Slip",doc_47:"Last six months of Bank statements",doc_48:"Most current Savings Account  Statement (1 month only)",doc_49:"Printout of Current Balance",doc_50:"Revocable trust statements  from bank (6 months)",doc_51:"Property Tax Papers  (most current year) ",doc_52:"Crypto statements (6 months)",doc_53:"Stock, Bond, Treasury bills  statements (6 months)",doc_54:"Copy of Insurance & Surrender Value statement",doc_55:"Most current CD Statement (1 month)  ",doc_56:"Most current Money Mkt statement (1 month)",doc_57:"Most current statement of IRA, 401K",doc_58:"Lumpsum pension, or Keogh A/c",doc_59:"Document showing sale of asset",}
     console.log(data)
     var table = document.createElement("table");

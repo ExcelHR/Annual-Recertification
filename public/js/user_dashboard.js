@@ -1,4 +1,6 @@
 (async () => {
+    // Fetch URL Query Params
+
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     console.log(params)
@@ -14,6 +16,7 @@
     document.getElementById('address1').innerHTML=res.data.Address
     document.getElementById('address2').innerHTML=`${res.data.City}      ${res.data.Zip}      ${res.data.State}`
     document.getElementById('HouseholdName').innerHTML="Welcome"+" "+ householdName+"!!"
+    // Ads property field to tenant Database
     respData=await axios.post(`/user/addProperty`,{id:userId,Property:res.data.Property})
     console.log(respData)
  
@@ -250,7 +253,3 @@ const reuploadDocuments = async (fileName, householdId, status, i) => {
 
 }
 
-const addNewTentant=()=>{
-    console.log("addNewTentant")
-    window.location.href=`/user/addNewTenant/?id=${userId}&code=${code}&unitNo=${unitNo}&name=${householdName}`
-}

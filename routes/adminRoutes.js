@@ -13,45 +13,7 @@ router.route("/loginValidation")
 router.route("/dashboard")
     .get(adminController.admin_dashboard)
 
-// Renders all customers page
 
-// Renders specific customer's page
-
-
-// router.get("/editCustomer/:customerId",(req,res)=>{
-//     res.render("edit-customer",{customerId:req.params.customerId})
-// })
-
-
-// Handler for - "/dashboard"
-
-// // Handler for - "/addProperty"
-// router.route("/addProperty")
-//     .get(adminController.getAddProperty)
-//     .post(userController.protect, adminController.postAddProperty)
-
-// // Handler for - "/allCustomers"
-// router.route("/allCustomers")
-//     .get(adminController.getAllCustomers)
-// // .post(userController.protect, adminController.postAddProperty)
-
-// // Handler for - "/customer/{specific customer ID(number)}"
-// router.route("/customer/:customerId")
-//     .get(adminController.getCustomer)
-//     .patch(adminController.updateCustomer)
-//     .delete(adminController.deleteCustomer)
-
-// // Handler for - "/customer/{specific customer ID(number)}/setState - Sets verification staus"
-// router.route("/customer/:customerId/setState")
-//     .post(adminController.postSetState)
-
-// // Handler for - "/customer/{specific customer ID(number)}/comments - Inserts comments on a user specific rental documents"
-// router.route("/customer/:customerId/comments")
-//     .post(adminController.postComments)
-
-// // Handler for - "/customer/{specific customer ID(number)}/viewed - Sets status on admin viewed documents"
-// router.route("/customer/:customerId/viewed")
-//     .post(adminController.postViewed)
 router.route("/getFile/:filename")
     .get(adminController.getFile)
 
