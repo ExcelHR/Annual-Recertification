@@ -1,4 +1,6 @@
 # Welcome to the Excel Application Recertification Portal!
+# Description
+- It is a project where tenant uploads documents for annual recertification. Admin logs in and reviews the document and has the right to reject or approve the document. On rejection the  tenant will have to reupload the documents. On user Dashboard the tenant can keep a track of the uploaded documents and take appropriate action to make sure all documents are verified
 # System rerequirements
 
 - NodeJS
